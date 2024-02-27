@@ -1,0 +1,3 @@
+05_KiTS/img/img0105.nii.gz                                  05_KiTS/early_tumor_label_new_20mm_onlytumor/label0105.nii.gz
+05_KiTS/img/img0023.nii.gz                                  05_KiTS/early_tumor_label_new_20mm_onlytumor/label0023.nii.gz
+05_KiTS/img/img0019.nii.gz                                  05_KiTS/early_tumor_label_new_20mm_onlytumor/label0019.nii.gz
