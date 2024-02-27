@@ -13,13 +13,13 @@ This repository provides extensive examples of synthetic liver tumors generated 
 ## Paper
 
 <b>Towards Generalizable Tumor Synthesis</b> <br/>
-[Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1</sup>, [Xiaoxi Chen](https://scholar.google.com/citations?hl=en&user=bVHYVXQAAAAJ)<sup>2</sup>, [Alan L. Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>3</sup>, [Zhiwei Xiong](http://staff.ustc.edu.cn/~zwxiong/)<sup>1</sup>, [Wei Chen](https://weichen582.github.io/)<sup>3</sup> and [Zongwei Zhou](https://www.zongweiz.com/)<sup>3,*</sup> <br/>
+[Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1</sup>, [Xiaoxi Chen]()<sup>2</sup>, [Alan L. Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>3</sup>, [Zhiwei Xiong](http://staff.ustc.edu.cn/~zwxiong/)<sup>1</sup>, [Wei Chen](https://weichen582.github.io/)<sup>3</sup> and [Zongwei Zhou](https://www.zongweiz.com/)<sup>3,*</sup> <br/>
 <sup>1 </sup>University of Science and Technology of China,  <br/>
 <sup>2 </sup>Shanghai Jiao Tong University,  <br/>
 <sup>3 </sup>Johns Hopkins University  <br/>
 
 CVPR, 2024 <br/>
-[paper]() | [code](https://github.com/MrGiovanni/DiffTumor) | [talk]() | [slides]() | [poster](h)
+[paper]() | [code](https://github.com/MrGiovanni/DiffTumor) | [talk]() | [slides]() | [poster]()
 
 
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
@@ -55,17 +55,26 @@ cd DiffTumor
 
 See [installation instructions](https://github.com/MrGiovanni/DiffTumor/blob/main/INSTALL.md).
 
-## 1. Train segmentation models using synthetic tumors
+## 1. Train Autoencoder Model
+
+
+## 2. Train Diffusion Model
+
+
+## 3. Train Segmentation Model
 
 ```
 datapath=/mnt/zzhou82/PublicAbdominalData/
 
 # U-Net
-CUDA_VISIBLE_DEVICES=0 python -W ignore main.py --optim_lr=4e-4 --batch_size=2 --lrschedule=warmup_cosine --optim_name=adamw --model_name=unet --val_every=200 --max_epochs=4000 --save_checkpoint --workers=2 --noamp --distributed --dist-url=tcp://127.0.0.1:12235 --cache_num=200 --val_overlap=0.5 --syn --logdir="runs/synt.no_pretrain.unet" --train_dir $datapath --val_dir $datapath --json_dir datafolds/healthy.json
+
+
 # nnU-Net
-CUDA_VISIBLE_DEVICES=0 python -W ignore main.py --optim_lr=4e-4 --batch_size=2 --lrschedule=warmup_cosine --optim_name=adamw --model_name=swin_unetrv2 --swin_type=base --val_every=200 --max_epochs=4000 --save_checkpoint --workers=2 --noamp --distributed --dist-url=tcp://127.0.0.1:12231 --cache_num=200 --val_overlap=0.5 --syn --logdir="runs/synt.pretrain.swin_unetrv2_base" --train_dir $datapath --val_dir $datapath --json_dir datafolds/healthy.json --use_pretrained
+
+
 # Swin-UNETR
-CUDA_VISIBLE_DEVICES=0 python -W ignore main.py --optim_lr=4e-4 --batch_size=2 --lrschedule=warmup_cosine --optim_name=adamw --model_name=swin_unetrv2 --swin_type=base --val_every=200 --max_epochs=4000 --save_checkpoint --workers=2 --noamp --distributed --dist-url=tcp://127.0.0.1:12231 --cache_num=200 --val_overlap=0.5 --syn --logdir="runs/synt.no_pretrain.swin_unetrv2_base" --train_dir $datapath --val_dir $datapath --json_dir datafolds/healthy.json
+
+
 ```
 
 ## 2. Evaluation
@@ -76,13 +85,12 @@ CUDA_VISIBLE_DEVICES=0 python -W ignore main.py --optim_lr=4e-4 --batch_size=2 -
 datapath=/mnt/zzhou82/PublicAbdominalData/
 
 # U-Net
-CUDA_VISIBLE_DEVICES=0 python -W ignore validation.py --model=unet --val_overlap=0.75 --val_dir $datapath --json_dir datafolds/lits.json --log_dir runs/synt.no_pretrain.unet --save_dir out
-# Swin-UNETR-Base (pretrain)
-CUDA_VISIBLE_DEVICES=0 python -W ignore validation.py --model=swin_unetrv2 --swin_type=base --val_overlap=0.75 --val_dir $datapath --json_dir datafolds/lits.json --log_dir runs/synt.pretrain.swin_unetrv2_base --save_dir out
+
 # nnU-Net
-CUDA_VISIBLE_DEVICES=0 python -W ignore validation.py --model=swin_unetrv2 --swin_type=base --val_overlap=0.75 --val_dir $datapath --json_dir datafolds/lits.json --log_dir runs/synt.no_pretrain.swin_unetrv2_base --save_dir out
+
 # Swin-UNETR
-CUDA_VISIBLE_DEVICES=0 python -W ignore validation.py --model=swin_unetrv2 --swin_type=small --val_overlap=0.75 --val_dir $datapath --json_dir datafolds/lits.json --log_dir runs/synt.no_pretrain.swin_unetrv2_small --save_dir out
+
+
 ```
 
 ## TODO
