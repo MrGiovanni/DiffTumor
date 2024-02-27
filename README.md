@@ -33,13 +33,12 @@ CVPR, 2024 <br/>
 | liver  | U-Net  | [link]() |
 | pancreas  | U-Net | [link]() |
 | kidney  | U-Net | [link]() |
-| real  | nnU-Net | [link]() |
-| real  | nnU-Net | [link]() |
-| synt  | nnU-Net | [link]() |
-| synt  | swin_unetrv2_base | [link]() |
-| synt  | swin_unetrv2_base | [link]() |
-| synt  | swin_unetrv2_small | [link]() |
-| synt  | swin_unetrv2_tiny | [link]() |
+| liver  | nnU-Net | [link]() |
+| pancreas  | nnU-Net | [link]() |
+| kidney  | nnU-Net | [link]() |
+| liver  | Swin-UNETR | [link]() |
+| pancreas  | Swin-UNETR | [link]() |
+| kidney  | Swin-UNETR | [link]() |
 
 **Use the following command to download everything.**
 ```bash
