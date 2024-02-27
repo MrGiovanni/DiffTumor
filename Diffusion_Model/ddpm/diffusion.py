@@ -1,5 +1,3 @@
-"Largely taken and adapted from https://github.com/lucidrains/video-diffusion-pytorch"
-
 import math
 import copy
 import torch
@@ -17,7 +15,6 @@ from PIL import Image
 from tqdm import tqdm
 from einops import rearrange
 from einops_exts import check_shape, rearrange_many
-
 from rotary_embedding_torch import RotaryEmbedding
 
 from ddpm.text import tokenize, bert_embed, BERT_MODEL_DIM
@@ -25,9 +22,6 @@ from torch.utils.data import Dataset, DataLoader
 from vq_gan_3d.model.vqgan import VQGAN
 
 import matplotlib.pyplot as plt
-
-# helpers functions
-
 
 def exists(x):
     return x is not None
@@ -76,9 +70,6 @@ def is_list_str(x):
         return False
     return all([type(el) == str for el in x])
 
-# relative positional bias
-
-
 class RelativePositionBias(nn.Module):
     def __init__(
         self,
@@ -121,9 +112,6 @@ class RelativePositionBias(nn.Module):
             rel_pos, num_buckets=self.num_buckets, max_distance=self.max_distance)
         values = self.relative_attention_bias(rp_bucket)
         return rearrange(values, 'i j h -> h i j')
-
-# small helper modules
-
 
 class EMA():
     def __init__(self, beta):
@@ -560,7 +548,6 @@ class Unet3D(nn.Module):
             h.append(x)
             x = downsample(x)
 
-        # [2, 256, 32, 4, 4]
         x = self.mid_block1(x, t) 
         x = self.mid_spatial_attn(x)
         x = self.mid_temporal_attn(
@@ -591,7 +578,6 @@ def extract(a, t, x_shape):
 def cosine_beta_schedule(timesteps, s=0.008):
     """
     cosine schedule
-    as proposed in https://openreview.net/forum?id=-NEXDKk8gZ
     """
     steps = timesteps + 1
     x = torch.linspace(0, timesteps, steps, dtype=torch.float64)
@@ -613,7 +599,7 @@ class GaussianDiffusion(nn.Module):
         channels=3,
         timesteps=1000,
         loss_type='l1',
-        use_dynamic_thres=False,  # from the Imagen paper
+        use_dynamic_thres=False, 
         dynamic_thres_percentile=0.9,
         vqgan_ckpt=None,
     ):
@@ -764,18 +750,15 @@ class GaussianDiffusion(nn.Module):
         if is_list_str(cond):
             cond = bert_embed(tokenize(cond)).to(device)
 
-        # batch_size = cond.shape[0] if exists(cond) else batch_size
         batch_size = batch_size 
         image_size = self.image_size
         channels = 8 # self.channels
         num_frames = self.num_frames
-        # print((batch_size, channels, num_frames, image_size, image_size))
-        # print('cond_',cond.shape)
+        
         _sample = self.p_sample_loop(
             (batch_size, channels, num_frames, image_size, image_size), cond=cond, cond_scale=cond_scale)
 
         if isinstance(self.vqgan, VQGAN):
-            # denormalize TODO: Remove eventually
             _sample = (((_sample + 1.0) / 2.0) * (self.vqgan.codebook.embeddings.max() -
                                                   self.vqgan.codebook.embeddings.min())) + self.vqgan.codebook.embeddings.min()
 
@@ -814,8 +797,7 @@ class GaussianDiffusion(nn.Module):
     def p_losses(self, x_start, t, cond=None, noise=None, **kwargs):
         b, c, f, h, w, device = *x_start.shape, x_start.device
         noise = default(noise, lambda: torch.randn_like(x_start))
-        # breakpoint()
-        x_noisy = self.q_sample(x_start=x_start, t=t, noise=noise) # [2, 8, 32, 32, 32]
+        x_noisy = self.q_sample(x_start=x_start, t=t, noise=noise)
 
         if is_list_str(cond):
             cond = bert_embed(
@@ -842,7 +824,7 @@ class GaussianDiffusion(nn.Module):
         masked_img=masked_img.permute(0,1,-1,-3,-2)
         img=img.permute(0,1,-1,-3,-2)
         mask=mask.permute(0,1,-1,-3,-2)
-        # breakpoint()
+
         if isinstance(self.vqgan, VQGAN):
             with torch.no_grad():
                 img = self.vqgan.encode(
@@ -868,51 +850,9 @@ class GaussianDiffusion(nn.Module):
 
         b, device, img_size, = img.shape[0], img.device, self.image_size
         t = torch.randint(0, self.num_timesteps, (b,), device=device).long()
-        # breakpoint()
         return self.p_losses(img, t, cond=cond, *args, **kwargs)
 
 # trainer class
-
-
-CHANNELS_TO_MODE = {
-    1: 'L',
-    3: 'RGB',
-    4: 'RGBA'
-}
-
-
-def seek_all_images(img, channels=3):
-    assert channels in CHANNELS_TO_MODE, f'channels {channels} invalid'
-    mode = CHANNELS_TO_MODE[channels]
-
-    i = 0
-    while True:
-        try:
-            img.seek(i)
-            yield img.convert(mode)
-        except EOFError:
-            break
-        i += 1
-
-# tensor of shape (channels, frames, height, width) -> gif
-
-
-def video_tensor_to_gif(tensor, path, duration=120, loop=0, optimize=True):
-    tensor = ((tensor - tensor.min()) / (tensor.max() - tensor.min())) * 1.0
-    images = map(T.ToPILImage(), tensor.unbind(dim=1))
-    first_img, *rest_imgs = images
-    first_img.save(path, save_all=True, append_images=rest_imgs,
-                   duration=duration, loop=loop, optimize=optimize)
-    return images
-
-# gif -> (channels, frame, height, width) tensor
-
-
-def gif_to_tensor(path, channels=3, transform=T.ToTensor()):
-    img = Image.open(path)
-    tensors = tuple(map(transform, seek_all_images(img, channels=channels)))
-    return torch.stack(tensors, dim=1)
-
 
 def identity(t, *args, **kwargs):
     return t
@@ -925,59 +865,8 @@ def normalize_img(t):
 def unnormalize_img(t):
     return (t + 1) * 0.5
 
-
-def cast_num_frames(t, *, frames):
-    f = t.shape[1]
-
-    if f == frames:
-        return t
-
-    if f > frames:
-        return t[:, :frames]
-
-    return F.pad(t, (0, 0, 0, 0, 0, frames - f))
-
-
-class Dataset(data.Dataset):
-    def __init__(
-        self,
-        folder,
-        image_size,
-        channels=3,
-        num_frames=16,
-        horizontal_flip=False,
-        force_num_frames=True,
-        exts=['gif']
-    ):
-        super().__init__()
-        self.folder = folder
-        self.image_size = image_size
-        self.channels = channels
-        self.paths = [p for ext in exts for p in Path(
-            f'{folder}').glob(f'**/*.{ext}')]
-
-        self.cast_num_frames_fn = partial(
-            cast_num_frames, frames=num_frames) if force_num_frames else identity
-
-        self.transform = T.Compose([
-            T.Resize(image_size),
-            T.RandomHorizontalFlip() if horizontal_flip else T.Lambda(identity),
-            T.CenterCrop(image_size),
-            T.ToTensor()
-        ])
-
-    def __len__(self):
-        return len(self.paths)
-
-    def __getitem__(self, index):
-        path = self.paths[index]
-        tensor = gif_to_tensor(path, self.channels, transform=self.transform)
-        return self.cast_num_frames_fn(tensor)
-
-# trainer class
-
+# trainer clas
 from tensorboardX import SummaryWriter
-from train.lr_scheduler import LambdaWarmUpCosineScheduler
 import os
 class Trainer(object):
     def __init__(
@@ -1024,9 +913,6 @@ class Trainer(object):
 
         
         self.opt = Adam(diffusion_model.parameters(), lr=train_lr)
-        # self.scheduler=torch.optim.lr_scheduler.StepLR(self.opt, step_size=3000, gamma=0.5)
-        # scheduler = LambdaWarmUpCosineScheduler(warm_up_steps=1000, lr_min=0.0001, lr_max=0.1, lr_start=0.001, max_decay_steps=10000)
-        # self.scheduler = torch.optim.lr_scheduler.LambdaLR(self.opt, lr_lambda=scheduler.schedule)
         self.step = 0
 
         self.amp = amp
@@ -1093,7 +979,7 @@ class Trainer(object):
                 mask = data['label'].cuda()
                 mask[mask==1]=0
                 mask[mask==2]=1
-                # breakpoint()
+
                 input_data = torch.cat([image, mask], dim=0)
 
                 with autocast(enabled=self.amp):
@@ -1102,7 +988,7 @@ class Trainer(object):
                         prob_focus_present=prob_focus_present,
                         focus_present_mask=focus_present_mask
                     )
-                    # breakpoint()
+
                     self.scaler.scale(
                         loss / self.gradient_accumulate_every).backward()
 
@@ -1118,7 +1004,7 @@ class Trainer(object):
             self.scaler.step(self.opt)
             self.scaler.update()
             self.opt.zero_grad()
-            # self.scheduler.step()
+
             lr = self.opt.state_dict()['param_groups'][0]['lr']
             self.writer.add_scalar('Train_Loss', loss.item(), self.step)
             self.writer.add_scalar('Learning_rate', lr, self.step)
@@ -1132,8 +1018,6 @@ class Trainer(object):
                 print('best model: {} step'.format(self.step // self.save_and_sample_every))
 
             if self.step != 0 and self.step % self.save_and_sample_every == 0:
-            #     self.ema_model.eval()
-
                 with torch.no_grad():
                     milestone = self.step // self.save_and_sample_every
 

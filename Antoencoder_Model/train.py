@@ -20,7 +20,7 @@ def get_parameter_number(model):
     return {'Total': total_num, 'Trainable': trainable_num}
 
 
-@hydra.main(config_path='../config', config_name='base_cfg', version_base=None)
+@hydra.main(config_path='config', config_name='base_cfg', version_base=None)
 def run(cfg: DictConfig, args=None):
     pl.seed_everything(cfg.model.seed)
 

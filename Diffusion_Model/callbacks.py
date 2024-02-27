@@ -27,11 +27,6 @@ class ImageLogger(Callback):
     def log_local(self, save_dir, split, images,
                   global_step, current_epoch, batch_idx):
         root = os.path.join(save_dir, "images", split)
-        # print(root)
-        #mean = images.pop('mean_org')
-        #mean = mean[(None,)*3].swapaxes(0, -1)
-        #std = images.pop('std_org')
-        #std = std[(None,)*3].swapaxes(0, -1)
         for k in images:
             images[k] = (images[k] + 1.0) * 127.5  # std + mean
             torch.clamp(images[k], 0, 255)
@@ -106,11 +101,6 @@ class VideoLogger(Callback):
     def log_local(self, save_dir, split, videos,
                   global_step, current_epoch, batch_idx):
         root = os.path.join(save_dir, "videos", split)
-        # print(root)
-        #mean = videos.pop('mean_org')
-        #mean = mean[(None,)*4].swapaxes(0, -1)
-        #std = videos.pop('std_org')
-        #std = std[(None,)*4].swapaxes(0, -1)
         for k in videos:
             videos[k] = (videos[k] + 1.0) * 127.5  # std + mean
             torch.clamp(videos[k], 0, 255)
@@ -126,12 +116,10 @@ class VideoLogger(Callback):
             save_video_grid(grid, path)
 
     def log_vid(self, pl_module, batch, batch_idx, split="train"):
-        # print(batch_idx, self.batch_freq, self.check_frequency(batch_idx) and hasattr(pl_module, "log_videos") and callable(pl_module.log_videos) and self.max_videos > 0)
-        if (self.check_frequency(batch_idx) and  # batch_idx % self.batch_freq == 0
+        if (self.check_frequency(batch_idx) and 
                 hasattr(pl_module, "log_videos") and
                 callable(pl_module.log_videos) and
                 self.max_videos > 0):
-            # print(batch_idx, self.batch_freq,  self.check_frequency(batch_idx))
             logger = type(pl_module.logger)
 
             is_train = pl_module.training
