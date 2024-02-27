@@ -1,0 +1,25 @@
+name: synt
+image_channels: 1
+
+dataset_list: ['recon']
+data_root_path: /mnt/ccvl15/chongyu/
+data_txt_path: cross_eval/
+dist: False
+batch_size: 2
+num_workers: 8
+
+a_min: -175 # -175
+a_max: 250 # 250
+b_min: -1.0
+b_max: 1.0
+space_x: 1.0
+space_y: 1.0
+space_z: 1.0
+roi_x: 96
+roi_y: 96
+roi_z: 96
+num_samples: 2
+phase: train
+uniform_sample: False
+cache_dataset: True
+cache_rate: 0.05

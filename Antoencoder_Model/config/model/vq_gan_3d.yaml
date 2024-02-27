@@ -1,0 +1,36 @@
+seed: 1234
+num_workers: 32 # 30
+
+gpus: 1
+accumulate_grad_batches: 1
+default_root_dir: checkpoints/vq_gan/
+default_root_dir_postfix: '8k_96_d4_steplr'
+resume: False
+resume_version: 0
+resume_from_checkpoint: ~
+pretrained_checkpoint: ~
+max_steps: -1
+max_epochs: -1
+precision: 16
+gradient_clip_val: 1.0
+
+embedding_dim: 8
+n_codes: 16384
+n_hiddens: 16
+lr: 3e-4
+downsample: [4, 4, 4]
+disc_channels: 64
+disc_layers: 3
+discriminator_iter_start:
+disc_loss_type: hinge
+image_gan_weight: 1.0
+video_gan_weight: 1.0
+l1_weight: 4.0
+gan_feat_weight: 4.0 # 0.0
+perceptual_weight: 4.0 # 0.0
+i3d_feat: False
+restart_thres: 1.0
+no_random_restart: False
+norm_type: group
+padding_type: replicate
+num_groups: 32
