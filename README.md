@@ -82,7 +82,7 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 
 ```
 
-## 2. Evaluation
+## 4. Evaluation
 
 ```
 cd SegmentationModel
