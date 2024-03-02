@@ -9,6 +9,8 @@ please download these datasets and save to `<data-path>` (user-defined).
 - 03 [MSD-Pancreas](https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2)
 - 04 [KiTS](https://kits-challenge.org/kits23/#download-block)
 
+It can be publicly available datasets (e.g., AbdonmenAtlas) or your private datasets. Currently, we only take data formatted in nii.gz. 
+Download these datasets and save it to the datapath directory.
 ```bash
 wget https://www.dropbox.com/scl/fi/890cavm8n3pjyyy5df2lk/AbdomenAtlasMini1.0.tar.gz?rlkey=8d53plsdojlf9hjqqddbyfeb0 # 01 AbdonmenAtlas.tar.gz (300+ GB)
 wget https://www.dropbox.com/s/2i19kuw7qewzo6q/04_LiTS.tar.gz # 02 LiTS.tar.gz (17.42 GB)
