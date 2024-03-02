@@ -90,5 +90,16 @@ Werkzeug==2.1.2
 wrapt==1.14.1
 yarl==1.7.2
 zipp==3.8.0
-wandb
 tensorboardX==2.4.1
+protobuf==3.20.1
+sk-video
+torchstat
+timm
+elasticdeform
+opencv-python
+monai[nibabel]
+monai==0.9.0
+nibabel
+ml-collections
+glob2
+pytorch-lightning==1.6.4
