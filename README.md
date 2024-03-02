@@ -28,7 +28,7 @@ git clone https://github.com/MrGiovanni/DiffTumor.git
 cd DiffTumor
 ```
 
-See [installation instructions](https://github.com/MrGiovanni/DiffTumor/blob/main/INSTALL.md).
+See [installation instructions](documents/INSTALL.md).
 
 ## 1. Train Autoencoder Model
 ```

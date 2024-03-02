@@ -9,9 +9,35 @@ please download these datasets and save to `<data-path>` (user-defined).
 - 03 [MSD-Pancreas](https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2)
 - 04 [KiTS](https://kits-challenge.org/kits23/#download-block)
 
+```bash
+wget https://www.dropbox.com/s/jnv74utwh99ikus/01_Multi-Atlas_Labeling.tar.gz # 01 Multi-Atlas_Labeling.tar.gz (1.53 GB)
+wget https://www.dropbox.com/s/5yzdzb7el9r3o9i/02_TCIA_Pancreas-CT.tar.gz # 02 TCIA_Pancreas-CT.tar.gz (7.51 GB)
+wget https://www.dropbox.com/s/lzrhirei2t2vuwg/03_CHAOS.tar.gz # 03 CHAOS.tar.gz (925.3 MB)
+wget https://www.dropbox.com/s/2i19kuw7qewzo6q/04_LiTS.tar.gz # 04 LiTS.tar.gz (17.42 GB)
+```
+
 
 ## Dependency
 The code is tested on `python 3.8, Pytorch 1.12`.
+
+##### Setup environment
+```bash
+conda create -n difftumor python=3.8
+source activate difftumor # or conda activate difftumor
+```
+
+<details>
+<summary style="margin-left: 25px;">[Optional] If You are using Agave/Sol</summary>
+<div style="margin-left: 25px;">
+```bash
+module load anaconda3/5.3.0 # only for Agave
+
+module load mamba/latest # only for Sol
+mamba create -n difftumor python=3.8
+```
+</div>
+</details>
+
 #### Autoencoder 
 ```bash
 conda create -n Autoencoder python=3.8
