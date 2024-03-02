@@ -48,7 +48,6 @@ parser.add_argument('--reg_weight', default=1e-5, type=float)
 
 parser.add_argument('--noamp', action='store_true') #experimental
 parser.add_argument('--val_every', default=200, type=int)
-# parser.add_argument('--dropout_prob', default=0, type=float)
 parser.add_argument('--val_overlap', default=0.5, type=float)
 parser.add_argument('--cache_rate', default=0.5, type=float)
 
@@ -113,7 +112,6 @@ parser.add_argument('--amp_scale', action='store_true')
 parser.add_argument('--opt_level', default='O2', type=str)
 parser.add_argument('--opt', default='adamw', type=str)
 parser.add_argument('--lrschedule', default='warmup_cosine', type=str)
-parser.add_argument('--randaugment_n', default=0, type=int)
 parser.add_argument('--warmup_epochs', default=100, type=int)
 parser.add_argument('--resume_ckpt', action='store_true')
 parser.add_argument('--pretrained_dir', default=None, type=str)
@@ -257,9 +255,6 @@ def main():
     args = parser.parse_args()
     args.amp = not args.noamp
     
-    if args.randaugment_n > 0:
-        args.seg_aug_mode=5
-
     print("MAIN Argument values:")
     for k, v in vars(args).items():
         print(k, '=>', v)
@@ -304,7 +299,12 @@ def main_worker(gpu, args):
     fold = args.fold
     tumor_type = args.tumor_type
     organ_type = args.organ_type
-    
+    if organ_type == 'liver':
+        args.fg_thresh = 30
+    elif organ_type == 'pancreas':
+        args.fg_thresh = 15
+    elif organ_type == 'kidney':
+        args.fg_thresh = 25
     train_transform, val_transform = _get_transform(args)
 
     ## NETWORK

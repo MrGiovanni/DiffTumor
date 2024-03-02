@@ -4,8 +4,8 @@ This repository provides extensive examples of synthetic liver tumors generated 
 
 **Amazing**, right? 
 
-<p align="center"><img width="100%" src="figures/VisualTuringTest.png" /></p>
-<p align="center"><img width="100%" src="figures/Examples.gif" /></p>
+<p align="center"><img width="100%" src="figures/fig_teaser.png" /></p>
+
 
 ## Paper
 
@@ -21,6 +21,9 @@ CVPR, 2024 <br/>
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
 
 **We have summarized publications related to tumor synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re).**
+
+## Visual Turing Test
+<p align="center"><img width="100%" src="figures/fig_preliminary.png" /></p>
 
 ## Model
 
@@ -85,21 +88,21 @@ backbone=unet
 logdir="runs/$organ.fold$fold.$backbone"
 datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 dist=$((RANDOM % 99999 + 10000))
-python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 
 # nnU-Net
 backbone=nnunet
 logdir="runs/$organ.fold$fold.$backbone"
 datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 dist=$((RANDOM % 99999 + 10000))
-python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 
 # Swin-UNETR
 backbone=swinunetr
 logdir="runs/$organ.fold$fold.$backbone"
 datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 dist=$((RANDOM % 99999 + 10000))
-python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 
 ```
 
@@ -127,7 +130,8 @@ python -W ignore validation.py --model=swinunet --data_root $datapath --datafold
 
 - [x] Upload the paper to arxiv
 - [x] Upload the videos about Visual Turing Test
-- [ ] Release the checkpoint
+- [ ] Release the diffusion checkpoint
+- [ ] Release the segmentation checkpoint
 
 ## Citation
 
