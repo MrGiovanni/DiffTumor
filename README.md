@@ -22,8 +22,8 @@ CVPR, 2024 <br/>
 
 **We have summarized publications related to tumor synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re).**
 
-**We have released videos for Visual Turing Test in [Visual Turing Test)](https://www.dropbox.com/scl/fo/mgw953fdysvto2y6bog1c/h?rlkey=pqe9ar4xzo52ggm5v8v43275v&dl=0).**
-   
+**We have released videos for [Visual Turing Test](https://www.dropbox.com/scl/fo/mgw953fdysvto2y6bog1c/h?rlkey=pqe9ar4xzo52ggm5v8v43275v&dl=0).**
+
 ## 0. Installation
 
 ```bash
@@ -106,7 +106,10 @@ python -W ignore validation.py --model=swinunet --data_root $datapath --datafold
 ```
 
 ## Autoencoder
-
+```
+wget https://www.dropbox.com/
+tar -xzvf 
+```
 
 ## DiffusionModel
 | Tumor | Type | Download |
