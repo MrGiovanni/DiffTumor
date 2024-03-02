@@ -1,0 +1,29 @@
+vqgan_ckpt: None
+
+# Have to be derived from VQ-GAN Latent space dimensions
+diffusion_img_size: 24
+diffusion_depth_size: 24
+diffusion_num_channels: 17 # 17
+out_dim: 8
+dim_mults: [1,2,4,8]
+results_folder: checkpoints/ddpm/
+results_folder_postfix: 't4'
+load_milestone: False # False
+
+batch_size: 2 # 40
+num_workers: 20
+logger: wandb
+objective: pred_x0
+save_and_sample_every: 1000
+denoising_fn: Unet3D
+train_lr: 1e-4
+timesteps: 4
+sampling_timesteps: 200
+loss_type: l1
+train_num_steps: 60000 # total training steps
+gradient_accumulate_every: 2 
+ema_decay: 0.995 
+amp: False
+num_sample_rows: 1
+gpus: 0
+
