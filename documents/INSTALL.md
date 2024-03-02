@@ -29,12 +29,14 @@ source activate difftumor # or conda activate difftumor
 <details>
 <summary style="margin-left: 25px;">[Optional] If You are using Agave/Sol</summary>
 <div style="margin-left: 25px;">
+
 ```bash
 module load anaconda3/5.3.0 # only for Agave
 
 module load mamba/latest # only for Sol
 mamba create -n difftumor python=3.8
 ```
+
 </div>
 </details>
 
