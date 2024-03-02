@@ -101,14 +101,14 @@ python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_d
 python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 ```
-
-## Autoencoder
+## Checkpoint
+#### Autoencoder Model
 ```
 wget https://www.dropbox.com/
 tar -xzvf 
 ```
 
-## DiffusionModel
+#### Diffusion Model
 | Tumor | Type | Download |
 | ----  | ----  | ----     |
 | liver  | early | [link]() |
@@ -118,7 +118,7 @@ tar -xzvf
 | pancreas  | mid&late | [link]() |
 | kidney  | mid&late | [link]() |
 
-## SegmentationModel
+#### Segmentation Model
 
 | Tumor | Model | Download |
 | ----  | ----  | ----     |
