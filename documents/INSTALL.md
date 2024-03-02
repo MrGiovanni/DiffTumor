@@ -23,7 +23,6 @@ The code is tested on `python 3.8, Pytorch 1.12`.
 ##### Setup environment
 ```bash
 conda create -n difftumor python=3.8
-source activate difftumor # or conda activate difftumor
 ```
 
 <details>
@@ -39,6 +38,10 @@ mamba create -n difftumor python=3.8
 
 </div>
 </details>
+
+```bash
+source activate difftumor # or conda activate difftumor
+```
 
 #### Autoencoder 
 ```bash
