@@ -83,39 +83,43 @@ fold=0
 # U-Net
 backbone=unet
 logdir="runs/$organ.fold$fold.$backbone"
+datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 dist=$((RANDOM % 99999 + 10000))
-python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 
 # nnU-Net
 backbone=nnunet
 logdir="runs/$organ.fold$fold.$backbone"
+datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 dist=$((RANDOM % 99999 + 10000))
-python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 
 # Swin-UNETR
 backbone=swinunetr
 logdir="runs/$organ.fold$fold.$backbone"
+datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 dist=$((RANDOM % 99999 + 10000))
-python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir $datafold_dir
 
 ```
 
 ## 2. Evaluation
 
-#### AI model trained by synthetic tumors
-
 ```
 cd SegmentationModel
 datapath=/mnt/ccvl15/zzhou82/PublicAbdominalData/
+organ=liver
+fold=0
+datafold_dir="cross_eval/'$organ'_aug_data_fold/"
 
 # U-Net
-python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/ --tumor_type tumor --organ_type liver --fold 0 --log_dir 5_fold/liver/liver.fold0.unet --save_dir out/5_fold/liver/liver.fold0.unet
+python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 # nnU-Net
-python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/ --tumor_type tumor --organ_type liver --fold 0 --log_dir 5_fold/liver/liver.fold0.unet --save_dir out/5_fold/liver/liver.fold0.unet
+python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 # Swin-UNETR
-python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/ --tumor_type tumor --organ_type liver --fold 0 --log_dir 5_fold/liver/liver.fold0.unet --save_dir out/5_fold/liver/liver.fold0.unet
+python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 ```
 
