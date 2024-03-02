@@ -19,9 +19,6 @@ wget https://www.dropbox.com/s/2i19kuw7qewzo6q/04_LiTS.tar.gz # 02 LiTS.tar.gz (
 The code is tested on `python 3.8, Pytorch 1.12`.
 
 ##### Setup environment
-```bash
-conda create -n difftumor python=3.8
-```
 
 <details>
 <summary style="margin-left: 25px;">[Optional] If You are using Agave/Sol</summary>
@@ -38,6 +35,7 @@ mamba create -n difftumor python=3.8
 </details>
 
 ```bash
+conda create -n difftumor python=3.8
 source activate difftumor # or conda activate difftumor
 pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 pip install -r requirements.txt
