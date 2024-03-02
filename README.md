@@ -52,24 +52,51 @@ cd DiffTumor
 See [installation instructions](https://github.com/MrGiovanni/DiffTumor/blob/main/INSTALL.md).
 
 ## 1. Train Autoencoder Model
-
+```
+cd AutoencoderModel
+gpu_num=1
+datapath=/mnt/ccvl15/chongyu/
+cache_rate=0.05
+batch_size=4
+python train.py dataset.data_root_path=$datapath dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
+```
 
 ## 2. Train Diffusion Model
-
+```
+cd DiffusionModel
+python train.py dataset.name=liver_tumor_train dataset.fold=0 dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold0_tumor_96_t4"  
+```
 
 ## 3. Train Segmentation Model
-
 ```
-datapath=/mnt/zzhou82/PublicAbdominalData/
+cd SegmentationModel
+
+healthy_datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/
+datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/
+cache_rate=1.0
+batch_size=12
+val_every=50
+workers=12
+organ=liver
+fold=0
 
 # U-Net
-
+backbone=unet
+logdir="runs/$organ.fold$fold.$backbone"
+dist=$((RANDOM % 99999 + 10000))
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/
 
 # nnU-Net
-
+backbone=nnunet
+logdir="runs/$organ.fold$fold.$backbone"
+dist=$((RANDOM % 99999 + 10000))
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/
 
 # Swin-UNETR
-
+backbone=swinunetr
+logdir="runs/$organ.fold$fold.$backbone"
+dist=$((RANDOM % 99999 + 10000))
+python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-url=tcp://127.0.0.1:$dist --workers $workers --max_epochs 2000 --val_every $val_every --batch_size=$batch_size --save_checkpoint --distributed --noamp --organ_type $organ --organ_model $organ --tumor_type tumor --fg_thresh 30 --fold $fold --ddim_ts 50 --logdir=$logdir --healthy_data_root $healthy_datapath --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/
 
 ```
 
@@ -78,41 +105,36 @@ datapath=/mnt/zzhou82/PublicAbdominalData/
 #### AI model trained by synthetic tumors
 
 ```
-datapath=/mnt/zzhou82/PublicAbdominalData/
+cd SegmentationModel
+datapath=/mnt/ccvl15/zzhou82/PublicAbdominalData/
 
 # U-Net
+python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/ --tumor_type tumor --organ_type liver --fold 0 --log_dir 5_fold/liver/liver.fold0.unet --save_dir out/5_fold/liver/liver.fold0.unet
 
 # nnU-Net
+python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/ --tumor_type tumor --organ_type liver --fold 0 --log_dir 5_fold/liver/liver.fold0.unet --save_dir out/5_fold/liver/liver.fold0.unet
 
 # Swin-UNETR
-
+python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir cross_eval/liver_aug_data_fold/ --tumor_type tumor --organ_type liver --fold 0 --log_dir 5_fold/liver/liver.fold0.unet --save_dir out/5_fold/liver/liver.fold0.unet
 
 ```
 
+## TODO
+
+- [x] Upload the paper to arxiv
+- [x] Upload the videos about Visual Turing Test
+- [ ] Release the checkpoint
 
 ## Citation
 
 ```
-@inproceedings{hu2023label,
-  title={Label-free liver tumor segmentation},
-  author={Hu, Qixin and Chen, Yixiong and Xiao, Junfei and Sun, Shuwen and Chen, Jieneng and Yuille, Alan L and Zhou, Zongwei},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={7422--7432},
-  year={2023}
-}
-
-@article{hu2022synthetic,
-  title={Synthetic Tumors Make AI Segment Tumors Better},
-  author={Hu, Qixin and Xiao, Junfei and Chen, Yixiong and Sun, Shuwen and Chen, Jie-Neng and Yuille, Alan and Zhou, Zongwei},
-  journal={NeurIPS Workshop on Medical Imaging meets NeurIPS},
-  year={2022}
-}
-
-@article{li2023early,
-  title={Early Detection and Localization of Pancreatic Cancer by Label-Free Tumor Synthesis},
-  author={Li, Bowen and Chou, Yu-Cheng and Sun, Shuwen and Qiao, Hualin and Yuille, Alan and Zhou, Zongwei},
-  journal={arXiv preprint arXiv:2308.03008},
-  year={2023}
+@misc{chen2024generalizable,
+      title={Towards Generalizable Tumor Synthesis}, 
+      author={Qi Chen and Xiaoxi Chen and Haorui Song and Zhiwei Xiong and Alan Yuille and Chen Wei and Zongwei Zhou},
+      year={2024},
+      eprint={2402.19470},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
 }
 ```
 

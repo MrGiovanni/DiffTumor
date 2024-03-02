@@ -341,7 +341,23 @@ def main_worker(gpu, args):
             pretrained_add = 'model_swinvit.pt'
             model.load_from(weights=torch.load(pretrained_add))
             print('Use pretrained ViT weights from: {}'.format(pretrained_add))
-
+    elif args.model == 'nnunet':
+        from monai.networks.nets import DynUNet
+        from dynunet_pipeline.create_network import get_kernels_strides
+        from dynunet_pipeline.task_params import deep_supr_num
+        task_id = '03'
+        kernels, strides = get_kernels_strides(task_id)
+        model = DynUNet(
+            spatial_dims=3,
+            in_channels=1,
+            out_channels=3,
+            kernel_size=kernels,
+            strides=strides,
+            upsample_kernel_size=strides[1:],
+            norm_name="instance",
+            deep_supervision=False,
+            deep_supr_num=deep_supr_num[task_id],
+        )
     else:
         raise ValueError('Unsupported model ' + str(args.model_name))
         

@@ -27,8 +27,6 @@ parser.add_argument('--tumor_type', default='early', type=str)
 parser.add_argument('--organ_type', default='liver', type=str)
 parser.add_argument('--fold', default=0, type=int)
 
-# parser.add_argument('--val_dir', default=None, type=str)
-# parser.add_argument('--json_dir', default=None, type=str)
 parser.add_argument('--save_dir', default='out', type=str)
 parser.add_argument('--checkpoint', action='store_true')
 
@@ -82,7 +80,7 @@ def cal_dice_nsd(pred, truth, spacing_mm=(1,1,1), tolerance=2):
 def _get_model(args):
     inf_size = [96, 96, 96]
     print(args.model)
-    if args.model == 'swin_unetrv2':
+    if args.model == 'swinunetr':
         if args.swin_type == 'tiny':
             feature_size=12
         elif args.swin_type == 'small':
@@ -109,16 +107,10 @@ def _get_model(args):
                     strides=(2, 2, 2, 2),
                     num_res_units=2,
                 )
-    elif args.model == 'dynunet':
+    elif args.model == 'nnunet':
         from monai.networks.nets import DynUNet
         from dynunet_pipeline.create_network import get_kernels_strides
         from dynunet_pipeline.task_params import deep_supr_num
-        # if organ_type == 'liver':
-        #     task_id = '03'
-        # elif organ_type == 'pancreas':
-        #     task_id = '07'
-        # elif organ_type == 'kidney':
-        #     task_id = '11'
         task_id = '03'
         kernels, strides = get_kernels_strides(task_id)
         model = DynUNet(
@@ -160,8 +152,6 @@ def _get_model(args):
     return model, model_inferer
 
 def _get_loader(args):
-    # val_data_dir = args.val_dir
-    # datalist_json = args.json_dir 
     val_org_transform = transforms.Compose(
         [
             transforms.LoadImaged(keys=["image", "label", "organ_pseudo"]),
@@ -173,7 +163,6 @@ def _get_loader(args):
             transforms.ToTensord(keys=["image", "label", "organ_pseudo"]),
         ]
     )
-    # val_files = load_decathlon_datalist(datalist_json, True, "validation", base_dir=val_data_dir)
     val_img=[]
     val_lbl=[]
     val_name=[]
@@ -183,11 +172,9 @@ def _get_loader(args):
         val_img.append(args.data_root + line.strip().split()[0])
         val_lbl.append(args.data_root + line.strip().split()[1])
         val_pseudo_lbl.append('organ_pseudo_swin_new/'+args.organ_type + '/' + os.path.basename(line.strip().split()[1]))
-        # val_pseudo_lbl.append('organ_pseudo/extra_'+args.organ_type + '/' + os.path.basename(line.strip().split()[1]))
         val_name.append(name)
     data_dicts_val = [{'image': image, 'label': label, 'organ_pseudo': organ_pseudo, 'name': name}
                 for image, label, organ_pseudo, name in zip(val_img, val_lbl, val_pseudo_lbl, val_name)]
-    # breakpoint()
     print('val len {}'.format(len(data_dicts_val)))
 
     val_org_ds = data.Dataset(data_dicts_val, transform=val_org_transform)
@@ -204,11 +191,9 @@ def _get_loader(args):
             nearest_interp=False,
             to_tensor=True,
         ),
-        # AsDiscreted(keys="pred", argmax=True, to_onehot=3),
         AsDiscreted(keys="pred", argmax=True, to_onehot=3),
         AsDiscreted(keys="label", to_onehot=3),
         AsDiscreted(keys="organ_pseudo", to_onehot=3),
-        # SaveImaged(keys="pred", meta_keys="pred_meta_dict", output_dir=output_dir, output_postfix="seg", resample=False,output_dtype=np.uint8,separate_folder=False),
     ])
     
     return val_org_loader, post_transforms
@@ -251,15 +236,13 @@ def main():
             val_data['label'][val_data['label']==3] = 1
             val_data["pred"] = model_inferer(val_inputs)
             val_data = [post_transforms(i) for i in data.decollate_batch(val_data)]
-            # val_outputs, val_labels = from_engine(["pred", "label"])(val_data)
-            # breakpoint()
             val_outputs, val_labels, val_organ_pseudo = val_data[0]['pred'], val_data[0]['label'], val_data[0]['organ_pseudo']
             
             # val_outpus.shape == val_labels.shape  (3, H, W, Z)
             val_outputs, val_labels = val_outputs.detach().cpu().numpy(), val_labels.detach().cpu().numpy()
             val_organ_pseudo = val_organ_pseudo.detach().cpu().numpy()
             val_outputs[1, ...] = val_organ_pseudo[1, ...]
-            # denoise the ouputs 
+
             val_outputs = denoise_pred(val_outputs)
 
             current_liver_dice, current_liver_nsd = cal_dice_nsd(val_outputs[1,...], val_labels[1,...], spacing_mm=spacing_mm)
@@ -296,8 +279,6 @@ def main():
         print("organ nsd:", np.mean(liver_nsd))
         print("tumor dice:", np.mean(tumor_dice))
         print("tumor nsd",np.mean(tumor_nsd))
-        # print("tumor dice:", np.std(tumor_dice))
-        # print("tumor nsd",np.std(tumor_nsd))
         rows.append(['average', liver_dice, liver_nsd, tumor_dice, tumor_nsd])
 
         # save metrics to cvs file
@@ -310,6 +291,5 @@ def main():
             writer.writerow(header)
             writer.writerows(rows)
 
-# save path: save_dir/log_dir_name/str(args.val_overlap)/pred/
 if __name__ == "__main__":
     main()
