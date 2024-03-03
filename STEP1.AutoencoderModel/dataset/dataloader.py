@@ -236,7 +236,7 @@ def get_loader(args):
         train_name = []
 
         for item in args.dataset_list:
-            for line in open(os.path.join(args.data_txt_path,  item, 'AbdomenAtlas_8k.txt')):
+            for line in open(os.path.join(args.data_txt_path,  item, 'AbdomenAtlas_8k_raw.txt')):
                 name = line.strip().split()[1].split('.')[0]
                 train_img.append(args.data_root_path + line.strip().split()[0])
                 train_lbl.append(args.data_root_path + line.strip().split()[1])
