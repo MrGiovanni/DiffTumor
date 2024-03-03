@@ -5,7 +5,7 @@ import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 from torch.utils.data import DataLoader
 from vq_gan_3d.model import VQGAN
-from train.callbacks import ImageLogger, VideoLogger
+from callbacks import ImageLogger, VideoLogger
 import hydra
 from omegaconf import DictConfig, open_dict
 from dataset.dataloader import get_loader
