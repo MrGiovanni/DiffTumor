@@ -110,17 +110,18 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 
 We offer the pre-trained checkpoints of Segmentation Model (U-Net, nnU-Net and Swin UNETR), which were trained on real and synthetic tumors for liver, pancreas and kidney.
 
-| Tumor | Model | Download |
-| ----  | ----  | ----     |
-| liver  | U-Net  | [link]() |
-| pancreas  | U-Net | [link]() |
-| kidney  | U-Net | [link]() |
-| liver  | nnU-Net | [link]() |
-| pancreas  | nnU-Net | [link]() |
-| kidney  | nnU-Net | [link]() |
-| liver  | Swin-UNETR | [link]() |
-| pancreas  | Swin-UNETR | [link]() |
-| kidney  | Swin-UNETR | [link]() |
+<details>
+<summary style="margin-left: 25px;">U-Net</summary>
+<div style="margin-left: 25px;">
+
+| Tumor | Download |
+| ----  | ----     |
+| liver  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/unet_synt_liver_tumors.pt) |
+| pancreas  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/unet_synt_pancreas_tumors.pt) |
+| kidney  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/unet_synt_kidney_tumors.pt) |
+
+</div>
+</details>
 
 ## 4. Evaluation
 
