@@ -13,7 +13,7 @@ Early-stage tumors present similar imaging characteristics in computed tomograph
 <sup>3 </sup>Shanghai Jiao Tong University  <br/>
 CVPR, 2024 <br/>
 [paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf 
-) | [code](https://github.com/MrGiovanni/DiffTumor)
+) | [code](https://github.com/MrGiovanni/DiffTumor) | [huggingface](https://huggingface.co/MrGiovanni/DiffTumor)
 
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
 
@@ -119,6 +119,32 @@ We offer the pre-trained checkpoints of Segmentation Model (U-Net, nnU-Net and S
 | liver  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/unet_synt_liver_tumors.pt) |
 | pancreas  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/unet_synt_pancreas_tumors.pt) |
 | kidney  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/unet_synt_kidney_tumors.pt) |
+
+</div>
+</details>
+
+<details>
+<summary style="margin-left: 25px;">nnU-Net</summary>
+<div style="margin-left: 25px;">
+
+| Tumor | Download |
+| ----  | ----     |
+| liver  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/nnunet_synt_liver_tumors.pt) |
+| pancreas  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/nnunet_synt_pancreas_tumors.pt) |
+| kidney  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/nnunet_synt_kidney_tumors.pt) |
+
+</div>
+</details>
+
+<details>
+<summary style="margin-left: 25px;">Swin UNETR</summary>
+<div style="margin-left: 25px;">
+
+| Tumor | Download |
+| ----  | ----     |
+| liver  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/swinunetr_synt_liver_tumors.pt) |
+| pancreas  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/swinunetr_synt_pancreas_tumors.pt) |
+| kidney  | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/SegmentationModel/swinunetr_synt_kidney_tumors.pt) |
 
 </div>
 </details>
