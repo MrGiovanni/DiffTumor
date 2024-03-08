@@ -146,6 +146,7 @@ python -W ignore validation.py --model=swinunet --data_root $datapath --datafold
 - [x] Upload the videos about Visual Turing Test
 - [ ] Release the diffusion checkpoint
 - [ ] Release the segmentation checkpoint
+- [ ] Build a large-scale, semi-synthetic dataset for abdominal tumor segmentation in solid and tubular organs (in progress)
 
 ## Citation
 
