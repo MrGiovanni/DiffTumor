@@ -28,7 +28,7 @@ git clone https://github.com/MrGiovanni/DiffTumor.git
 cd DiffTumor
 ```
 
-See [installation instructions](documents/INSTALL.md).
+See [installation instructions](documents/INSTALL.md) to create an environment and obtain requirements.
 
 ## 1. Train Autoencoder Model
 ```
@@ -39,8 +39,19 @@ cache_rate=0.05
 batch_size=4
 python train.py dataset.data_root_path=$datapath dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
 ```
+We offer the pre-trained checkpoint of Autoencoder Model, which was trained on a combination of 17 publicly available CT datasets and 9,262 CT scans (see details in [SuPrem](https://github.com/MrGiovanni/SuPreM)).
+```
+wget https://www.dropbox.com/
+tar -xzvf 
+```
 
 ## 2. Train Diffusion Model
+Diffusoin Model need to be trained on tumor data with mask annotation. It can be publicly available datasets (e.g., LiTS, MSD-Pancreas, KiTS) or your private datasets. If you want to train a Diffusion Model that generates an early tumor, you need to first process the data to filter out the early tumor data. 
+**Dataset Pre-Process**  
+1. Download the dataset according to the dataset link.  
+2. Modify [ORGAN_DATASET_DIR](https://github.com/MrGiovanni/DiffTumor/blob/main/label_transfer.py) in data_transfer.py  
+3. `python -W ignore data_transfer.py`
+
 ```
 cd DiffusionModel
 python train.py dataset.name=liver_tumor_train dataset.fold=0 dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold0_tumor_96_t4"  
@@ -102,11 +113,7 @@ python -W ignore validation.py --model=swinunet --data_root $datapath --datafold
 
 ```
 ## Checkpoint
-#### Autoencoder Model
-```
-wget https://www.dropbox.com/
-tar -xzvf 
-```
+
 
 #### Diffusion Model
 | Tumor | Type | Download |
