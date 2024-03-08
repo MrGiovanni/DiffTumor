@@ -46,16 +46,29 @@ tar -xzvf
 ```
 
 ## 2. Train Diffusion Model
-Diffusoin Model need to be trained on tumor data with mask annotation. It can be publicly available datasets (e.g., LiTS, MSD-Pancreas, KiTS) or your private datasets. If you want to train a Diffusion Model that generates an early tumor, you need to first process the data to filter out the early tumor data. 
+Diffusoin Model need to be trained on tumor data with mask annotations. It can be publicly available datasets (e.g., LiTS, MSD-Pancreas, KiTS) or your private datasets. If you want to train a Diffusion Model that synthesize early tumors, you need to first process the data to filter out the early tumor data.
+
 **Dataset Pre-Process**  
 1. Download the dataset according to the dataset link.  
 2. Modify [ORGAN_DATASET_DIR](https://github.com/MrGiovanni/DiffTumor/blob/main/label_transfer.py) in data_transfer.py  
 3. `python -W ignore data_transfer.py`
 
+Then we take the example of training Diffusion Model with early-stage liver tumors.
 ```
 cd DiffusionModel
 python train.py dataset.name=liver_tumor_train dataset.fold=0 dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold0_tumor_96_t4"  
 ```
+
+We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively.
+
+| Tumor | Type | Download |
+| ----  | ----  | ----     |
+| liver  | early | [link]() |
+| pancreas  | early | [link]() |
+| kidney  | early | [link]() |
+| liver  | mid&late | [link]() |
+| pancreas  | mid&late | [link]() |
+| kidney  | mid&late | [link]() |
 
 ## 3. Train Segmentation Model
 ```
@@ -93,6 +106,20 @@ python -W ignore main.py --model_name $backbone --cache_rate $cache_rate --dist-
 
 ```
 
+We offer the pre-trained checkpoints of Segmentation Model (U-Net, nnU-Net and Swin UNETR), which were trained on real and synthetic tumors for liver, pancreas and kidney.
+
+| Tumor | Model | Download |
+| ----  | ----  | ----     |
+| liver  | U-Net  | [link]() |
+| pancreas  | U-Net | [link]() |
+| kidney  | U-Net | [link]() |
+| liver  | nnU-Net | [link]() |
+| pancreas  | nnU-Net | [link]() |
+| kidney  | nnU-Net | [link]() |
+| liver  | Swin-UNETR | [link]() |
+| pancreas  | Swin-UNETR | [link]() |
+| kidney  | Swin-UNETR | [link]() |
+
 ## 4. Evaluation
 
 ```
@@ -112,32 +139,6 @@ python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_d
 python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 ```
-## Checkpoint
-
-
-#### Diffusion Model
-| Tumor | Type | Download |
-| ----  | ----  | ----     |
-| liver  | early | [link]() |
-| pancreas  | early | [link]() |
-| kidney  | early | [link]() |
-| liver  | mid&late | [link]() |
-| pancreas  | mid&late | [link]() |
-| kidney  | mid&late | [link]() |
-
-#### Segmentation Model
-
-| Tumor | Model | Download |
-| ----  | ----  | ----     |
-| liver  | U-Net  | [link]() |
-| pancreas  | U-Net | [link]() |
-| kidney  | U-Net | [link]() |
-| liver  | nnU-Net | [link]() |
-| pancreas  | nnU-Net | [link]() |
-| kidney  | nnU-Net | [link]() |
-| liver  | Swin-UNETR | [link]() |
-| pancreas  | Swin-UNETR | [link]() |
-| kidney  | Swin-UNETR | [link]() |
 
 ## TODO
 
