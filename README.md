@@ -4,8 +4,6 @@ Early-stage tumors present similar imaging characteristics in computed tomograph
 
 <p align="center"><img width="100%" src="figures/fig_teaser.png" /></p>
 
-**We have released videos for [Visual Turing Test](https://www.dropbox.com/scl/fo/mgw953fdysvto2y6bog1c/h?rlkey=pqe9ar4xzo52ggm5v8v43275v&dl=0).** Check to see if you could tell which is real tumor and which is synthetic tumor. 
-
 ## Paper
 
 <b>Towards Generalizable Tumor Synthesis</b> <br/>
@@ -20,6 +18,10 @@ CVPR, 2024 <br/>
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
 
 **We have summarized publications related to tumor synthesis in [Awesome Synthetic Tumors](https://github.com/MrGiovanni/SyntheticTumors/blob/main/AWESOME.md) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re).**
+
+## Visual Turing Test
+**We have released videos for [Visual Turing Test](https://www.dropbox.com/scl/fo/mgw953fdysvto2y6bog1c/h?rlkey=pqe9ar4xzo52ggm5v8v43275v&dl=0).** Check to see if you could tell which is real tumor and which is synthetic tumor. 
+
 
 ## 0. Installation
 
@@ -50,13 +52,14 @@ Diffusoin Model need to be trained on tumor data with mask annotations. It can b
 
 **Dataset Pre-Process**  
 1. Download the dataset according to the dataset link.  
-2. Modify [ORGAN_DATASET_DIR](https://github.com/MrGiovanni/DiffTumor/blob/main/label_transfer.py) in data_transfer.py  
+2. Modify [data_dir](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py) and [tumor_save_dir](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py) in data_transfer.py  
 3. `python -W ignore data_transfer.py`
 
 Then we take the example of training Diffusion Model with early-stage liver tumors.
 ```
 cd DiffusionModel
-python train.py dataset.name=liver_tumor_train dataset.fold=0 dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold0_tumor_96_t4"  
+fold=0
+python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold'$fold'_tumor_96_t4"  
 ```
 
 We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively.
