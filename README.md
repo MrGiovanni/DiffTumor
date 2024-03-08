@@ -43,8 +43,7 @@ python train.py dataset.data_root_path=$datapath dataset.cache_rate=$cache_rate 
 ```
 We offer the pre-trained checkpoint of Autoencoder Model, which was trained on a combination of 17 publicly available CT datasets and 9,262 CT scans (see details in [SuPrem](https://github.com/MrGiovanni/SuPreM)).
 ```
-wget https://www.dropbox.com/
-tar -xzvf 
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 ```
 
 ## 2. Train Diffusion Model
