@@ -1,5 +1,5 @@
 seed: 1234
-num_workers: 32 # 30
+num_workers: 16
 
 gpus: 1
 accumulate_grad_batches: 1
@@ -21,13 +21,13 @@ lr: 3e-4
 downsample: [4, 4, 4]
 disc_channels: 64
 disc_layers: 3
-discriminator_iter_start:
+discriminator_iter_start: 10000
 disc_loss_type: hinge
 image_gan_weight: 1.0
 video_gan_weight: 1.0
 l1_weight: 4.0
-gan_feat_weight: 4.0 # 0.0
-perceptual_weight: 4.0 # 0.0
+gan_feat_weight: 4.0
+perceptual_weight: 4.0 
 i3d_feat: False
 restart_thres: 1.0
 no_random_restart: False
