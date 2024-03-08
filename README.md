@@ -65,12 +65,12 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 
 | Tumor | Type | Download |
 | ----  | ----  | ----     |
-| liver  | early | [link]() |
-| pancreas  | early | [link]() |
-| kidney  | early | [link]() |
-| liver  | mid&late | [link]() |
-| pancreas  | mid&late | [link]() |
-| kidney  | mid&late | [link]() |
+| liver  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_early.pt) |
+| liver  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_noearly.pt) |
+| pancreas  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/pancreas_early.pt) |
+| pancreas  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/pancreas_noearly.pt) |
+| kidney  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/kidney_early.pt) |
+| kidney  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/kidney_noearly.pt) |
 
 ## 3. Train Segmentation Model
 ```
