@@ -52,7 +52,7 @@ Diffusoin Model need to be trained on tumor data with mask annotations. It can b
 
 **Dataset Pre-Process**  
 1. Download the dataset according to the dataset link.  
-2. Modify [data_dir](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py) and [tumor_save_dir](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py) in data_transfer.py  
+2. Modify `data_dir` and `tumor_save_dir` in [data_transfer.py](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py).
 3. `python -W ignore data_transfer.py`
 
 Then we take the example of training Diffusion Model with early-stage liver tumors.
