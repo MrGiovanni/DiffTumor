@@ -41,7 +41,7 @@ cache_rate=0.05
 batch_size=4
 python train.py dataset.data_root_path=$datapath dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
 ```
-We offer the pre-trained checkpoint of Autoencoder Model, which was trained on a combination of 17 publicly available CT datasets and 9,262 CT scans (see details in [SuPrem](https://github.com/MrGiovanni/SuPreM)).
+We offer the pre-trained checkpoint of Autoencoder Model, which was trained on a combination of 17 publicly available CT datasets and 9,262 CT scans (see details in [SuPreM](https://github.com/MrGiovanni/SuPreM)).
 ```
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 ```
