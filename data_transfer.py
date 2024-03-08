@@ -24,7 +24,7 @@ def pixel2voxel(A,res=[0.75,0.75,0.5]):
     return np.array(A)*(res[0]*res[1]*res[2])
 
 
-def filter_liver_early_tumor(data_dir = '/mnt/ccvl15/zzhou82/PublicAbdominalData/04_LiTS/04_LiTS/label/',tumor_save_dir='04_LiTS/early_tumor_label'):
+def filter_liver_early_tumor(data_dir = '/mnt/ccvl15/zzhou82/PublicAbdominalData/04_LiTS/04_LiTS/label/',tumor_save_dir='04_LiTS/early_tumor_label/'):
 
     total_clot_size=[]
     total_clot_size_mmR=[]
@@ -71,8 +71,8 @@ def filter_liver_early_tumor(data_dir = '/mnt/ccvl15/zzhou82/PublicAbdominalData
 if __name__ == '__main__':
     data_dir = ''
     tumor_save_dir = ''
+    os.makedirs(tumor_save_dir, exist_ok=True)
     filter_liver_early_tumor(data_dir, tumor_save_dir)
-
 
     file_list = glob.glob(tumor_save_dir+'/*')
     file_list.sort()
@@ -82,9 +82,9 @@ if __name__ == '__main__':
         label_array = nib.load(label_path)
         label_array = label_array.get_fdata()
         if len(np.unique(label_array)) == 3:
-            f.write('04_LiTS/early_tumor_label/'+name)
+            f.write(tumor_save_dir+name)
             f.write('\n')
-            print('name', '04_LiTS/early_tumor_label/'+name)
+            print('name', tumor_save_dir+name)
     f.close() 
 
     
