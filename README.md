@@ -1,6 +1,6 @@
 # Generalizable Tumor Synthesis
 
-Early-stage tumors present similar imaging characteristics in computed tomography (CT), whether they are located in the liver, pancreas, or kidneys. Leveraging this observation, we develop a generative AI model on a few examples of annotated tumors in a specific organ, e.g., the liver (in purple). This AI model (in purple), trained exclusively on liver tumors, can directly create synthetic tumors in those organs where CT volumes of annotated tumors are relatively scarce, e.g., the pancreas (in cyan) and kidneys (in blue and green). By integrating synthetic tumors into extensive CT volumes of healthy organs—routinely collected in clinical settings—we can substantially augment the training set for tumor segmentation. This enhancement can also significantly improve the AI generalizability across CT volumes sourced from diverse hospitals and patient demographics.
+We have shown that many types of tumors in different abdominal organs look very similar if they are small (less than 2cm) which implies that we can train the AI to detect tumors in the liver or kidney but only training the diffusion model on tumors in the pancreas ([Q. Chen et al. CVPR 2024](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf)). These studies have been validated both by studies of radiologists (by challenging them to distinguish between a synthetic tumor and a real tumor) and by comprehensive tests of the AI algorithms trained using stimulated data.
 
 <p align="center"><img width="100%" src="figures/fig_teaser.png" /></p>
 
@@ -12,8 +12,7 @@ Early-stage tumors present similar imaging characteristics in computed tomograph
 <sup>2 </sup>University of Science and Technology of China,  <br/>
 <sup>3 </sup>Shanghai Jiao Tong University  <br/>
 CVPR, 2024 <br/>
-[paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf 
-) | [code](https://github.com/MrGiovanni/DiffTumor) | [huggingface](https://huggingface.co/MrGiovanni/DiffTumor)
+[paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf) | [code](https://github.com/MrGiovanni/DiffTumor) | [huggingface](https://huggingface.co/MrGiovanni/DiffTumor)
 
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
 
