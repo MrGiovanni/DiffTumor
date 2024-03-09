@@ -35,10 +35,11 @@ See [installation instructions](documents/INSTALL.md) to create an environment a
 You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini). You need to download this dataset and save it to the `datapath` directory.
 ```
 cd AutoencoderModel
+datapath=<your-datapath>
 gpu_num=1
 cache_rate=0.05
 batch_size=4
-dataset_list="AbdomenAtals_1.0"
+dataset_list="AbdomenAtlasMini1.0"
 python train.py dataset.data_root_path=$datapath dataset.dataset_list=$dataset_list dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
 ```
 We offer the pre-trained checkpoint of Autoencoder Model, which was trained on AbdomenAtlas 1.1 dataset (see details in [SuPreM](https://github.com/MrGiovanni/SuPreM)).
@@ -59,6 +60,8 @@ Then we take the example of training Diffusion Model with early-stage liver tumo
 ```
 cd DiffusionModel
 fold=0
+datapath=<your-datapath>
+tumor_save_dir=<your-labelpath>
 python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumor_save_dir dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold'$fold'_tumor_96_t4"  
 ```
 
