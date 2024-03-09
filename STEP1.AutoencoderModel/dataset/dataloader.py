@@ -316,8 +316,8 @@ def get_loader(args):
         train_name=[]
         for line in open(os.path.join(args.data_txt_path,  args.dataset_list)):
             name = line.strip().split('\t')[0]
-            train_img.append(args.data_root_path + 'AbdomenAtlas /' + name + '/ct.nii.gz')
-            train_lbl.append(args.data_root_path + 'AbdomenAtlas /' + name + '/segmentations/')
+            train_img.append(args.data_root_path + args.dataset_list + '/' + name + '/ct.nii.gz')
+            train_lbl.append(args.data_root_path + args.dataset_list + '/' + name + '/segmentations/')
             train_name.append(name)
         data_dicts_train = [{'image': image, 'label': label, 'name': name}
                     for image, label, name in zip(train_img, train_lbl, train_name)]
