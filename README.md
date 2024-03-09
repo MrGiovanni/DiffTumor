@@ -34,7 +34,7 @@ See [installation instructions](documents/INSTALL.md) to create an environment a
 ## 1. Train Autoencoder Model
 You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini). You need to download this dataset and save it to the `datapath` directory.
 ```
-cd AutoencoderModel
+cd STEP1.AutoencoderModel
 datapath=<your-datapath>
 gpu_num=1
 cache_rate=0.05
@@ -58,7 +58,7 @@ Diffusoin Model need to be trained on tumor data with mask annotations. It can b
 
 Then we take the example of training Diffusion Model with early-stage liver tumors.
 ```
-cd DiffusionModel
+cd STEP2.DiffusionModel
 fold=0
 datapath=<your-datapath>
 tumor_save_dir=<your-labelpath>
@@ -78,7 +78,7 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 
 ## 3. Train Segmentation Model
 ```
-cd SegmentationModel
+cd STEP3.SegmentationModel
 
 healthy_datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/
 datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/

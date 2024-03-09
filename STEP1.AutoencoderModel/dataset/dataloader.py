@@ -139,6 +139,7 @@ class LoadImaged_BodyMap(MapTransform):
 
     def __call__(self, data, reader: Optional[ImageReader] = None):
         d = dict(data)
+        # print(d['image'])
         for key, meta_key, meta_key_postfix in self.key_iterator(d, self.meta_keys, self.meta_key_postfix):
             try:
                 data = self._loader(d[key], reader)
@@ -314,7 +315,7 @@ def get_loader(args):
         train_img=[]
         train_lbl=[]
         train_name=[]
-        for line in open(os.path.join(args.data_txt_path,  args.dataset_list)):
+        for line in open(os.path.join(args.data_txt_path,  args.dataset_list+'.txt')):
             name = line.strip().split('\t')[0]
             train_img.append(args.data_root_path + args.dataset_list + '/' + name + '/ct.nii.gz')
             train_lbl.append(args.data_root_path + args.dataset_list + '/' + name + '/segmentations/')
@@ -322,8 +323,8 @@ def get_loader(args):
         data_dicts_train = [{'image': image, 'label': label, 'name': name}
                     for image, label, name in zip(train_img, train_lbl, train_name)]
         print('train len {}'.format(len(data_dicts_train)))
-        # data_dicts_train=data_dicts_train[:20]
-
+        # data_dicts_train=data_dicts_train[:10]
+        # breakpoint()
     
         if args.cache_dataset:
             if args.uniform_sample:
