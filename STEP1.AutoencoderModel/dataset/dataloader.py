@@ -317,8 +317,8 @@ def get_loader(args):
         train_name=[]
         for line in open(os.path.join(args.data_txt_path,  args.dataset_list+'.txt')):
             name = line.strip().split('\t')[0]
-            train_img.append(args.data_root_path + args.dataset_list + '/' + name + '/ct.nii.gz')
-            train_lbl.append(args.data_root_path + args.dataset_list + '/' + name + '/segmentations/')
+            train_img.append(os.path.join(args.data_root_path, name + '/ct.nii.gz'))
+            train_lbl.append(os.path.join(args.data_root_path, name + '/segmentations/'))
             train_name.append(name)
         data_dicts_train = [{'image': image, 'label': label, 'name': name}
                     for image, label, name in zip(train_img, train_lbl, train_name)]
@@ -348,8 +348,8 @@ def get_loader(args):
         for item in args.dataset_list:
             for line in open(os.path.join(args.data_txt_path,  item, 'real_tumor_val_0.txt')):
                 name = line.strip().split()[1].split('.')[0]
-                val_img.append(args.data_root_path + line.strip().split()[0])
-                val_lbl.append(args.data_root_path + line.strip().split()[1])
+                val_img.append(os.path.join(args.data_root_path, line.strip().split()[0]))
+                val_lbl.append(os.path.join(args.data_root_path, line.strip().split()[1]))
                 val_name.append(name)
         data_dicts_val = [{'image': image, 'label': label, 'name': name}
                     for image, label, name in zip(val_img, val_lbl, val_name)]

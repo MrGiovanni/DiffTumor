@@ -23,7 +23,7 @@ source activate difftumor
 # pip install -r ../requirements.txt
 
 datapath=/scratch/zzhou82/data/AbdomenAtlas1.0Mini/
-cache_rate=0.05
+cache_rate=0.001
 batch_size=8
 dataset_list="AbdomenAtlasMini1.0"
 
