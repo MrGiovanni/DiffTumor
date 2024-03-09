@@ -1,4 +1,4 @@
-vqgan_ckpt: 'recon_96d4.ckpt'
+vqgan_ckpt: 'AutoencoderModel.ckpt'
 
 # Have to be derived from VQ-GAN Latent space dimensions
 diffusion_img_size: 24

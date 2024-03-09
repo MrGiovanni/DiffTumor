@@ -207,7 +207,7 @@ def get_fixed_geo(mask_scan, tumor_type, organ_type):
 
     return geo_mask
 
-def synt_model_prepare(device, vqgan_ckpt='TumorGeneration/model_weight/recon_96d4_all.ckpt', diffusion_ckpt='TumorGeneration/model_weight/', fold=0, organ='liver'):
+def synt_model_prepare(device, vqgan_ckpt='TumorGeneration/model_weight/AutoencoderModel.ckpt', diffusion_ckpt='TumorGeneration/model_weight/', fold=0, organ='liver'):
     with initialize(config_path="diffusion_config/"):
         cfg=compose(config_name="ddpm.yaml")
     print('diffusion_ckpt',diffusion_ckpt)
@@ -252,9 +252,9 @@ def synt_model_prepare(device, vqgan_ckpt='TumorGeneration/model_weight/recon_96
             ).to(device)
     
     early_tester = Tester(early_diffusion)
-    early_tester.load(diffusion_ckpt+'diff_{}_fold{}_early.pt'.format(organ, fold), map_location=device)
+    early_tester.load(diffusion_ckpt+'{}_early.pt'.format(organ), map_location=device)
 
-    noearly_checkpoint = torch.load(diffusion_ckpt+'diff_{}_fold{}_noearly_t200.pt'.format(organ, fold), map_location=device)
+    noearly_checkpoint = torch.load(diffusion_ckpt+'{}_noearly.pt'.format(organ), map_location=device)
     noearly_diffusion.load_state_dict(noearly_checkpoint['ema'])
     noearly_sampler = DDIMSampler(noearly_diffusion, schedule="cosine")
 

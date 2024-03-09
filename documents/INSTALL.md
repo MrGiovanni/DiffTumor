@@ -2,7 +2,7 @@
 
 ## Dataset
 
-Please download these datasets and save to `<data-path>` (user-defined).
+Please download these datasets and save to `datapath` (user-defined).
 
 - 01 [AbdonmenAtlas 1.0](https://github.com/MrGiovanni/AbdomenAtlas)
 - 02 [Liver Tumor Segmentation Challenge (LiTS)](https://competitions.codalab.org/competitions/17094)
