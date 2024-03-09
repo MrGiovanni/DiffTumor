@@ -22,12 +22,13 @@ source activate difftumor
 # pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 # pip install -r ../requirements.txt
 
-datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/
+datapath=/scratch/zzhou82/data/AbdomenAtlas1.0Mini/
 cache_rate=0.05
-batch_size=4
+batch_size=8
+dataset_list="AbdomenAtlasMini1.0"
 
 # single GPU
 gpu_num=1
-python -W ignore train.py dataset.data_root_path=$datapath dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
+python train.py dataset.data_root_path=$datapath dataset.dataset_list=$dataset_list dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
 
 # sbatch --error=logs/autoencoder_model.out --output=logs/autoencoder_model.out hg.sh

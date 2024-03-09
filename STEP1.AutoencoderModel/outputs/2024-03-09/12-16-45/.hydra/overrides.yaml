@@ -1,0 +1,5 @@
+- dataset.data_root_path=/scratch/zzhou82/data/AbdomenAtlas1.0Mini/
+- dataset.dataset_list=AbdomenAtlasMini1.0
+- dataset.cache_rate=0.05
+- dataset.batch_size=8
+- model.gpus=1
