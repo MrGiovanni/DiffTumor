@@ -33,11 +33,10 @@ cd DiffTumor
 See [installation instructions](documents/INSTALL.md) to create an environment and obtain requirements.
 
 ## 1. Train Autoencoder Model
-You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini).
+You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini). You need to download this dataset and save it to the `datapath` directory.
 ```
 cd AutoencoderModel
 gpu_num=1
-datapath=/mnt/ccvl15/chongyu/
 cache_rate=0.05
 batch_size=4
 python train.py dataset.data_root_path=$datapath dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
