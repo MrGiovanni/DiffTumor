@@ -2,9 +2,9 @@
 
 ## Dataset
 
-please download these datasets and save to `<data-path>` (user-defined).
+Please download these datasets and save to `<data-path>` (user-defined).
 
-- 01 [AbdonmenAtlas](https://github.com/MrGiovanni/AbdomenAtlas)
+- 01 [AbdonmenAtlas 1.0](https://github.com/MrGiovanni/AbdomenAtlas)
 - 02 [Liver Tumor Segmentation Challenge (LiTS)](https://competitions.codalab.org/competitions/17094)
 - 03 [MSD-Pancreas](https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2)
 - 04 [KiTS](https://kits-challenge.org/kits23/#download-block)
