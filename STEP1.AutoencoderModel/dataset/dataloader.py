@@ -166,25 +166,25 @@ class LoadImaged_BodyMap(MapTransform):
         
         if os.path.exists(lbl_dir + 'liver' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'liver' + '.nii.gz')
-            organ_lbl[array == 1] = 1
+            organ_lbl[array > 0] = 1
         if os.path.exists(lbl_dir + 'pancreas' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'pancreas' + '.nii.gz')
-            organ_lbl[array == 1] = 2
+            organ_lbl[array > 0] = 2
         if os.path.exists(lbl_dir + 'kidney_left' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'kidney_left' + '.nii.gz')
-            organ_lbl[array == 1] = 3
+            organ_lbl[array > 0] = 3
         if os.path.exists(lbl_dir + 'kidney_right' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'kidney_right' + '.nii.gz')
-            organ_lbl[array == 1] = 3
+            organ_lbl[array > 0] = 3
         if os.path.exists(lbl_dir + 'liver_tumor' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'liver_tumor' + '.nii.gz')
-            organ_lbl[array == 1] = 4
+            organ_lbl[array > 0] = 4
         if os.path.exists(lbl_dir + 'pancreas_tumor' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'pancreas_tumor' + '.nii.gz')
-            organ_lbl[array == 1] = 5
+            organ_lbl[array > 0] = 5
         if os.path.exists(lbl_dir + 'pancreas_tumor' + '.nii.gz'):
             array, mata_infomation = self._loader(lbl_dir + 'kidney_tumor' + '.nii.gz')
-            organ_lbl[array == 1] = 6
+            organ_lbl[array > 0] = 6
 
         return organ_lbl, mata_infomation
 
