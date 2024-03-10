@@ -34,7 +34,7 @@ See [installation instructions](documents/INSTALL.md) to create an environment a
 You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini). You need to download this dataset and save it to the `datapath` directory.
 ```
 cd STEP1.AutoencoderModel
-datapath=<your-datapath>
+datapath=<your-datapath> (e.g., /data/bdomenAtlasMini1.0/)
 gpu_num=1
 cache_rate=0.05
 batch_size=4
@@ -48,23 +48,37 @@ wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/A
 
 
 ## 2. Train Diffusion Model
-Diffusoin Model need to be trained on tumor data with mask annotations. It can be publicly available datasets (e.g., LiTS, MSD-Pancreas, KiTS) or your private datasets. If you want to train a Diffusion Model that synthesize early tumors, you need to first process the data to filter out the early tumor data.
+In our study, Diffusion Model focus on the tumor region generation (simple texture and small shape) instead of the entire image. Early-stage tumors appear similar in the three abdominal organs, enabling models to effectively learn these characteristics from minimal examples. We take the example of training Diffusion Model for early-stage liver tumors. 
+We offer the preprocessed labels for early-stage tumors and mid-/late- stage tumors.
+<details>
+<summary style="margin-left: 25px;">Preprocessed labels</summary>
+<div style="margin-left: 25px;">
 
-**Dataset Pre-Process**  
-1. Download the dataset according to the dataset link.  
-2. Modify `data_dir` and `tumor_save_dir` in [data_transfer.py](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py).
-3. `python -W ignore data_transfer.py`
+| Tumor | Type | Download |
+| ----  | ----  | ----     |
+| liver  | early | [link]() |
+| liver  | mid&late | [link]() |
+| pancreas  | early | [link]() |
+| pancreas  | mid&late | [link]() |
+| kidney  | early | [link]() |
+| kidney  | mid&late | [link]() |
 
-Then we take the example of training Diffusion Model with early-stage liver tumors.
+</div>
+</details>
+
 ```
 cd STEP2.DiffusionModel
 fold=0
 datapath=<your-datapath>
 tumor_save_dir=<your-labelpath>
-python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumor_save_dir dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="fold'$fold'_tumor_96_t4"  
+python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumor_save_dir dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="liver_early_tumor_fold'$fold'"  
 ```
 
 We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively.
+
+<details>
+<summary style="margin-left: 25px;">Diffusion Model checkpoints</summary>
+<div style="margin-left: 25px;">
 
 | Tumor | Type | Download |
 | ----  | ----  | ----     |
@@ -74,6 +88,21 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 | pancreas  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/pancreas_noearly.pt) |
 | kidney  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/kidney_early.pt) |
 | kidney  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/kidney_noearly.pt) |
+
+</div>
+</details>
+
+<details>
+<summary style="margin-left: 25px;">Training details</summary>
+<div style="margin-left: 25px;">
+Diffusoin Model need to be trained on tumor data with mask annotations. It can be publicly available datasets (e.g., LiTS, MSD-Pancreas, KiTS) or your private datasets. If you want to train a Diffusion Model that synthesize early tumors, you need to first process the data to filter out the early tumor data.
+
+**Dataset Pre-Process**  
+1. Download the dataset according to the [installation instructions](documents/INSTALL.md).  
+2. Modify `data_dir` and `tumor_save_dir` in [data_transfer.py](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py).
+3. `python -W ignore data_transfer.py`
+</div>
+</details>
 
 ## 3. Train Segmentation Model
 ```
