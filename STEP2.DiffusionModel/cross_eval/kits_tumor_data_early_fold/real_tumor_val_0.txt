@@ -1,3 +1,3 @@
-05_KiTS/img/img0031.nii.gz                                  05_KiTS/early_tumor_label/label0031.nii.gz
-05_KiTS/img/img0100.nii.gz                                  05_KiTS/early_tumor_label/label0100.nii.gz
-05_KiTS/img/img0050.nii.gz                                  05_KiTS/early_tumor_label/label0050.nii.gz
+05_KiTS/img/img0031.nii.gz                                  kidney_early_tumor/label0031.nii.gz
+05_KiTS/img/img0100.nii.gz                                  kidney_early_tumor/label0100.nii.gz
+05_KiTS/img/img0050.nii.gz                                  kidney_early_tumor/label0050.nii.gz

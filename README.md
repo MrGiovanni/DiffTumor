@@ -68,10 +68,11 @@ We offer the preprocessed labels for early-stage tumors and mid-/late- stage tum
 
 ```
 cd STEP2.DiffusionModel
+vqgan_ckpt=<pretrained-AutoencoderModel>
 fold=0
 datapath=<your-datapath>
 tumor_save_dir=<your-labelpath>
-python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumor_save_dir dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="liver_early_tumor_fold'$fold'"  
+python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumor_save_dir dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="liver_early_tumor_fold'$fold'"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
 We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively.
@@ -80,14 +81,9 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 <summary style="margin-left: 25px;">Diffusion Model checkpoints</summary>
 <div style="margin-left: 25px;">
 
-| Tumor | Type | Download |
-| ----  | ----  | ----     |
-| liver  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_early.pt) |
-| liver  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_noearly.pt) |
-| pancreas  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/pancreas_early.pt) |
-| pancreas  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/pancreas_noearly.pt) |
-| kidney  | early | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/kidney_early.pt) |
-| kidney  | mid&late | [link](https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/kidney_noearly.pt) |
+```
+wget https://huggingface.co/MrGiovanni/DiffTumor/xxx
+```
 
 </div>
 </details>

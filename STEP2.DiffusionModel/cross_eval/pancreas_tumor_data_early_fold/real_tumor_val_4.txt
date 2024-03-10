@@ -1,0 +1,8 @@
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_050.nii.gz   pancreas_early_tumor/pancreas_050.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_175.nii.gz   pancreas_early_tumor/pancreas_175.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_173.nii.gz   pancreas_early_tumor/pancreas_173.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_196.nii.gz   pancreas_early_tumor/pancreas_196.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_170.nii.gz   pancreas_early_tumor/pancreas_170.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_110.nii.gz   pancreas_early_tumor/pancreas_110.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_147.nii.gz   pancreas_early_tumor/pancreas_147.nii.gz
+10_Decathlon/Task07_Pancreas/imagesTr/pancreas_067.nii.gz   pancreas_early_tumor/pancreas_067.nii.gz
