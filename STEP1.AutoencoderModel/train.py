@@ -24,14 +24,13 @@ def get_parameter_number(model):
 def run(cfg: DictConfig, args=None):
     pl.seed_everything(cfg.model.seed)
 
-    train_dataloader, train_sampler, dataset_size = get_loader(cfg.dataset)
+    train_dataloader, _, _ = get_loader(cfg.dataset)
     val_dataloader=None
 
     # automatically adjust learning rate
-    bs, base_lr, ngpu, accumulate = cfg.dataset.batch_size, cfg.model.lr, cfg.model.gpus, cfg.model.accumulate_grad_batches
+    base_lr = cfg.model.lr
 
     with open_dict(cfg):
-        # cfg.model.lr = accumulate * (ngpu/8.) * (bs/4.) * base_lr
         cfg.model.lr = 1 * (1/8.) * (2/4.) * base_lr
         cfg.model.default_root_dir = os.path.join(
             cfg.model.default_root_dir, cfg.dataset.name, cfg.model.default_root_dir_postfix)
