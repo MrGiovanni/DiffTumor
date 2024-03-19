@@ -31,7 +31,7 @@ cd DiffTumor
 See [installation instructions](documents/INSTALL.md) to create an environment and obtain requirements.
 
 ## 1. Train Autoencoder Model
-You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini). You need to download this dataset and save it to the `datapath` directory.
+You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini).
 ```
 cd STEP1.AutoencoderModel
 datapath=<your-datapath> (e.g., /data/bdomenAtlasMini1.0/)
@@ -102,7 +102,7 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 </details>
 
 ## 3. Train Segmentation Model
-Download heathy CT data. (More details can be seen in corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
+Download heathy CT data. (More details can be seen in the corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
 ```
 mkdir HealthyCT
 cd HealthyCT
@@ -206,6 +206,7 @@ python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_d
 python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 ```
+We provide the singularity container for DiffTumor in [huggingface](https://huggingface.co/qicq1c/DiffTumor). You can directly perform segmentation inference on your own data.
 
 ## TODO
 
