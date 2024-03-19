@@ -5,9 +5,9 @@
 #SBATCH -n 12
 #SBATCH -G a100:1
 ##SBATCH --exclusive
-#SBATCH --mem=80G
+#SBATCH --mem=100G
 #SBATCH -p general
-#SBATCH -t 0-05:00:00
+#SBATCH -t 7-00:00:00
 #SBATCH -q public
 
 #SBATCH -o %x_slurm_%j.out     
@@ -25,7 +25,7 @@ source activate difftumor
 datapath=/scratch/zzhou82/data/AbdomenAtlas1.0Mini/
 cache_rate=0.001
 batch_size=8
-dataset_list="AbdomenAtlasMini1.0"
+dataset_list="AbdomenAtlas1.0Mini"
 
 # single GPU
 gpu_num=1
