@@ -52,15 +52,15 @@ In our study, Diffusion Model focuses on the tumor region generation (simple tex
 
 Download the public dataset MSD-Liver (More datasets can be seen in [installation instructions](documents/INSTALL.md)). 
 ```
-wget https://www.dropbox.com/xxx
-mv 
-unzip 
+wget https://huggingface.co/datasets/qicq1c/Pubilcdataset/resolve/main/10_Decathlon/Task03_Liver.tar.gz?download=true
+mv Task03_Liver.tar.gz?download=true Task03_Liver.tar.gz
+tar -zxvf Task03_Liver.tar.gz
 ```
 We offer the preprocessed labels for early-stage tumors and mid-/late- stage tumors.
 ```
-wget  https://huggingface.co/MrGiovanni/DiffTumor/xxx
-mv 
-unzip 
+wget https://huggingface.co/qicq1c/DiffTumor/resolve/main/preprocessed_labels.zip?download=true
+mv preprocessed_labels.zip?download=true preprocessed_labels.zip
+unzip preprocessed_labels.zip
 ```
 Start training.
 ```
@@ -102,11 +102,20 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 </details>
 
 ## 3. Train Segmentation Model
+Download heathy CT data. (More details can be seen in corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
+```
+mkdir HealthyCT
+cd HealthyCT
+huggingface-cli download qicq1c/HealthyCT  --repo-type dataset --local-dir .  --cache-dir ./cache
+cat healthy_ct.zip* > HealthyCT.zip
+rm -rf healthy_ct.zip* cache
+unzip -o -q HealthyCT.zip -d /HealthyCT
+```
 ```
 cd STEP3.SegmentationModel
 
-healthy_datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/
-datapath=/data/jliang12/zzhou82/datasets/PublicAbdominalData/
+healthy_datapath=<your-datapath> (e.g., /data/HealthyCT/)
+datapath=<your-datapath> (e.g., /data/10_Decathlon/Task03_Liver/)
 cache_rate=1.0
 batch_size=12
 val_every=50

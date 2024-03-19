@@ -12,8 +12,9 @@ Please download these datasets and save to `datapath` (user-defined).
 It can be publicly available datasets (e.g., LiTS) or your private datasets. Currently, we only take data formatted in nii.gz. 
 Download these datasets and save it to the datapath directory.
 ```bash
-wget https://www.dropbox.com/scl/fi/890cavm8n3pjyyy5df2lk/AbdomenAtlasMini1.0.tar.gz?rlkey=8d53plsdojlf9hjqqddbyfeb0 # 01 AbdonmenAtlas.tar.gz (300+ GB)
-wget https://www.dropbox.com/s/2i19kuw7qewzo6q/04_LiTS.tar.gz # 02 LiTS.tar.gz (17.42 GB)
+wget https://huggingface.co/datasets/qicq1c/Pubilcdataset/resolve/main/10_Decathlon/Task03_Liver.tar.gz?download=true # Task03_Liver.tar.gz (28.7 GB)
+wget https://huggingface.co/datasets/qicq1c/Pubilcdataset/resolve/main/10_Decathlon/Task07_Pancreas.tar.gz?download=true # Task07_Pancreas.tar.gz (28.7 GB)
+wget https://huggingface.co/datasets/qicq1c/Pubilcdataset/tree/main/05_KiTS.tar.gz?download=true # KiTS.tar.gz (28 GB)
 ```
 
 

@@ -380,21 +380,19 @@ def main_worker(gpu, args):
     train_img_healthy=[]
     train_lbl_healthy=[]
     train_name_healthy=[]
-    if args.syn:
-        train_txt = os.path.join(datafold_dir, '../healthy_{}.txt'.format(organ_type))
-    else:
-        train_txt = os.path.join(datafold_dir, 'real_{}_train_{}.txt'.format(tumor_type, fold))
+
+    train_txt = os.path.join(datafold_dir, 'real_{}_train_{}.txt'.format(tumor_type, fold))
 
     for line in open(train_txt):
-        name = line.strip().split()[0].split('.')[0]
+        name = line.strip().split()[1].split('.')[0]
 
-        if '10_Decathlon' in name or '05_KiTS' in name:
+        if 'kidney_label' in name or 'liver_label' in name or 'pancreas_label' in name:
             train_img_real.append(data_root + line.strip().split()[0])
             train_lbl_real.append(data_root + line.strip().split()[1])
             train_name_real.append(name)
         else:
             train_img_healthy.append(healthy_data_root + line.strip().split()[0])
-            train_lbl_healthy.append('healthy_label/' + line.strip().split()[1])
+            train_lbl_healthy.append(healthy_data_root + line.strip().split()[1])
             train_name_healthy.append(name)
     
     train_img = train_img_real + train_img_healthy
