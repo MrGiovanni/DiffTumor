@@ -61,7 +61,17 @@ We offer the preprocessed labels for early-stage tumors and mid-/late- stage tum
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/preprocessed_labels.tar.gz
 tar -zxvf preprocessed_labels.tar.gz
 ```
+<details>
+<summary style="margin-left: 25px;">Preprocess details</summary>
+<div style="margin-left: 25px;">
+
+1. Download the dataset according to the [installation instructions](documents/INSTALL.md).  
+2. Modify `data_dir` and `tumor_save_dir` in [data_transfer.py](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py).
+3. `python -W ignore data_transfer.py`
+</div>
+</details>
 Start training.
+
 ```bash
 cd STEP2.DiffusionModel/
 vqgan_ckpt=<pretrained-AutoencoderModel> (e.g., /pretrained_models/AutoencoderModel.ckpt)
@@ -71,7 +81,12 @@ tumorlabel=<your-labelpath> (e.g., /data/preprocessed_labels/)
 python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="liver_early_tumor_fold'$fold'"  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
-We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively.
+We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `STEP3.SegmentationModel/TumorGeneration/model_weight`
+```bash
+cd STEP3.SegmentationModel/TumorGeneration/model_weight/
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_early.pt
+```
 
 <details>
 <summary style="margin-left: 25px;">Checkpoints</summary>
@@ -89,17 +104,6 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 </div>
 </details>
 
-<details>
-<summary style="margin-left: 25px;">Preprocess details</summary>
-<div style="margin-left: 25px;">
-
-**Dataset Pre-Process**  
-1. Download the dataset according to the [installation instructions](documents/INSTALL.md).  
-2. Modify `data_dir` and `tumor_save_dir` in [data_transfer.py](https://github.com/MrGiovanni/DiffTumor/blob/main/data_transfer.py).
-3. `python -W ignore data_transfer.py`
-</div>
-</details>
-
 ## 3. Train Segmentation Model
 Download heathy CT data. (More details can be seen in the corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
 ```
@@ -110,6 +114,15 @@ cat healthy_ct.zip* > HealthyCT.zip
 rm -rf healthy_ct.zip* cache
 unzip -o -q HealthyCT.zip -d /HealthyCT
 ```
+
+Prepare Autoencoder and Diffusion Model. Put the pre-trained weights to `STEP3.SegmentationModel/TumorGeneration/model_weight`
+```bash
+cd STEP3.SegmentationModel/TumorGeneration/model_weight/
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_early.pt
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_noearly.pt
+```
+Start training.
 ```
 cd STEP3.SegmentationModel
 

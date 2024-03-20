@@ -155,9 +155,7 @@ def get_fixed_geo(mask_scan, tumor_type, organ_type):
             y_low, y_high = new_point[1] - geo.shape[1]//2, new_point[1] + geo.shape[1]//2 
             z_low, z_high = new_point[2] - geo.shape[2]//2, new_point[2] + geo.shape[2]//2 
             
-            # paste medium tumor geo into test sample
             geo_mask[x_low:x_high, y_low:y_high, z_low:z_high] += geo
-            # texture_map[x_low:x_high, y_low:y_high, z_low:z_high] = texture
 
     if tumor_type == 'large':
         num_tumor = 1
