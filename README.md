@@ -82,11 +82,6 @@ python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_r
 ```
 
 We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `STEP3.SegmentationModel/TumorGeneration/model_weight`
-```bash
-cd STEP3.SegmentationModel/TumorGeneration/model_weight/
-wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
-wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_early.pt
-```
 
 <details>
 <summary style="margin-left: 25px;">Checkpoints</summary>
