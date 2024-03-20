@@ -243,4 +243,4 @@ We provide the singularity container for DiffTumor in [huggingface](https://hugg
 
 ## Acknowledgement
 
-This work was supported by the Lustgarten Foundation for Pancreatic Cancer Research and the McGovern Foundation. The segmentation backbone is based on [Swin UNETR](https://github.com/Project-MONAI/tutorials/blob/main/3d_segmentation/swin_unetr_btcv_segmentation_3d.ipynb); we appreciate the effort of the [MONAI Team](https://monai.io/) to provide and maintain open-source code to the community. Paper content is covered by patents pending.
+This work was supported by the Lustgarten Foundation for Pancreatic Cancer Research and the McGovern Foundation. The codebase is modified from NVIDIA MONAI. Paper content is covered by patents pending.
