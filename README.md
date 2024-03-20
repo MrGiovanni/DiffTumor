@@ -32,7 +32,7 @@ See [installation instructions](documents/INSTALL.md) to create an environment a
 
 ## 1. Train Autoencoder Model
 You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini).
-```
+```bash
 cd STEP1.AutoencoderModel
 datapath=<your-datapath> (e.g., /data/bdomenAtlasMini1.0/)
 gpu_num=1
@@ -41,8 +41,9 @@ batch_size=4
 dataset_list="AbdomenAtlas1.0Mini"
 python train.py dataset.data_root_path=$datapath dataset.dataset_list=$dataset_list dataset.cache_rate=$cache_rate dataset.batch_size=$batch_size model.gpus=$gpu_num
 ```
-We offer the pre-trained checkpoint of Autoencoder Model, which was trained on AbdomenAtlas 1.1 dataset (see details in [SuPreM](https://github.com/MrGiovanni/SuPreM)).
-```
+We offer the pre-trained checkpoint of Autoencoder Model, which was trained on AbdomenAtlas 1.1 dataset (see details in [SuPreM](https://github.com/MrGiovanni/SuPreM)). This checkpoint can be directly used for STEP2 if you do not want to re-train the Autoencoder Model. Simply download it to `STEP2.DiffusionModel/pretrained_models/AutoencoderModel.ckpt`
+```bash
+cd STEP2.DiffusionModel/pretrained_models/
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/AutoencoderModel.ckpt
 ```
 
@@ -51,20 +52,18 @@ wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/AutoencoderModel/A
 In our study, Diffusion Model focuses on the tumor region generation (simple texture and small shape). Early-stage tumors appear similar in the three abdominal organs, enabling models to effectively learn these characteristics from minimal examples. If you want to train Diffusion Model that synthesize early tumors, you need to first process the data to filter out the early tumors labels. We take the example of training Diffusion Model for early-stage liver tumors. 
 
 Download the public dataset MSD-Liver (More datasets can be seen in [installation instructions](documents/INSTALL.md)). 
-```
-wget https://huggingface.co/datasets/qicq1c/Pubilcdataset/resolve/main/10_Decathlon/Task03_Liver.tar.gz?download=true
-mv Task03_Liver.tar.gz?download=true Task03_Liver.tar.gz
+```bash
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/Task03_Liver.tar.gz
 tar -zxvf Task03_Liver.tar.gz
 ```
 We offer the preprocessed labels for early-stage tumors and mid-/late- stage tumors.
-```
-wget https://huggingface.co/qicq1c/DiffTumor/resolve/main/preprocessed_labels.zip?download=true
-mv preprocessed_labels.zip?download=true preprocessed_labels.zip
-unzip preprocessed_labels.zip
+```bash
+wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/preprocessed_labels.tar.gz
+tar -zxvf preprocessed_labels.tar.gz
 ```
 Start training.
-```
-cd STEP2.DiffusionModel
+```bash
+cd STEP2.DiffusionModel/
 vqgan_ckpt=<pretrained-AutoencoderModel> (e.g., /pretrained_models/AutoencoderModel.ckpt)
 fold=0
 datapath=<your-datapath> (e.g., /data/10_Decathlon/Task03_Liver/)
