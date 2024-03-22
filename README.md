@@ -100,10 +100,11 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 </details>
 
 ## 3. Train Segmentation Model
-Download healthy CT data. 
+
+Download healthy CT data
 
 <details>
-<summary style="margin-left: 25px;">Download from Huggingface</summary>
+<summary style="margin-left: 25px;">from Huggingface</summary>
 <div style="margin-left: 25px;">
 
 (More details can be seen in the corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
@@ -120,7 +121,7 @@ unzip -o -q HealthyCT.zip -d /HealthyCT
 </details>
 
 <details>
-<summary style="margin-left: 25px;">Download from Dropbox</summary>
+<summary style="margin-left: 25px;">from Dropbox</summary>
 <div style="margin-left: 25px;">
       
 ```bash
