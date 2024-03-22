@@ -108,7 +108,7 @@ Download healthy CT data
 <div style="margin-left: 25px;">
 
 (More details can be seen in the corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
-```
+```bash
 mkdir HealthyCT
 cd HealthyCT
 huggingface-cli download qicq1c/HealthyCT  --repo-type dataset --local-dir .  --cache-dir ./cache
@@ -140,7 +140,7 @@ wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liv
 wget https://huggingface.co/MrGiovanni/DiffTumor/resolve/main/DiffusionModel/liver_noearly.pt
 ```
 Start training.
-```
+```bash
 cd STEP3.SegmentationModel
 
 healthy_datapath=<your-datapath> (e.g., /data/HealthyCT/)
@@ -218,7 +218,7 @@ We offer the pre-trained checkpoints of Segmentation Model (U-Net, nnU-Net and S
 
 ## 4. Evaluation
 
-```
+```bash
 cd SegmentationModel
 datapath=/mnt/ccvl15/zzhou82/PublicAbdominalData/
 organ=liver
@@ -236,14 +236,6 @@ python -W ignore validation.py --model=swinunet --data_root $datapath --datafold
 
 ```
 We provide the singularity container for DiffTumor in [huggingface](https://huggingface.co/qicq1c/DiffTumor). You can directly perform segmentation inference on your own data.
-
-## TODO
-
-- [x] Upload the paper to arxiv
-- [x] Upload the videos about Visual Turing Test
-- [x] Release the checkpoints of Autoencoder Model and Diffusion Model
-- [x] Release the checkpoints of Segmentation Model
-- [ ] Build a large-scale, semi-synthetic dataset for abdominal tumor segmentation in solid and tubular organs (in progress)
 
 ## Citation
 
