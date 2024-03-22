@@ -100,7 +100,13 @@ We offer the pre-trained checkpoints of Diffusion Model, which were trained for 
 </details>
 
 ## 3. Train Segmentation Model
-Download heathy CT data. (More details can be seen in the corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
+Download healthy CT data. 
+
+<details>
+<summary style="margin-left: 25px;">Download from Huggingface</summary>
+<div style="margin-left: 25px;">
+
+(More details can be seen in the corresponding [huggingface repository](https://huggingface.co/datasets/qicq1c/HealthyCT)).
 ```
 mkdir HealthyCT
 cd HealthyCT
@@ -109,6 +115,21 @@ cat healthy_ct.zip* > HealthyCT.zip
 rm -rf healthy_ct.zip* cache
 unzip -o -q HealthyCT.zip -d /HealthyCT
 ```
+
+</div>
+</details>
+
+<details>
+<summary style="margin-left: 25px;">Download from Dropbox</summary>
+<div style="margin-left: 25px;">
+      
+```bash
+wget https://www.dropbox.com/scl/fi/j8di09jm1s798ofnwlkf6/HealthyCT.tar.gz?rlkey=ujuc82109eceld1vmwwu24z26
+mv HealthyCT.tar.gz?rlkey=ujuc82109eceld1vmwwu24z26 HealthyCT.tar.gz
+```
+
+</div>
+</details>
 
 Prepare Autoencoder and Diffusion Model. Put the pre-trained weights to `STEP3.SegmentationModel/TumorGeneration/model_weight`
 ```bash
