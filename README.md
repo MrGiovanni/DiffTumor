@@ -127,6 +127,7 @@ unzip -o -q HealthyCT.zip -d /HealthyCT
 ```bash
 wget https://www.dropbox.com/scl/fi/j8di09jm1s798ofnwlkf6/HealthyCT.tar.gz?rlkey=ujuc82109eceld1vmwwu24z26
 mv HealthyCT.tar.gz?rlkey=ujuc82109eceld1vmwwu24z26 HealthyCT.tar.gz
+tar -xzvf HealthyCT.tar.gz
 ```
 
 </div>
