@@ -118,7 +118,7 @@ parser.add_argument('--pretrained_dir', default=None, type=str)
 parser.add_argument('--data_root', default=None, type=str)
 parser.add_argument('--healthy_data_root', default=None, type=str)
 parser.add_argument('--datafold_dir', default=None, type=str)
-
+parser.add_argument('--fold', default=0, type=int)
 parser.add_argument('--cache_num', default=200, type=int)
 
 parser.add_argument('--use_pretrained', action='store_true')
