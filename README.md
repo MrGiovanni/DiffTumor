@@ -236,7 +236,15 @@ python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_d
 python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 ```
-We provide the singularity container for DiffTumor in [huggingface](https://huggingface.co/qicq1c/DiffTumor). You can directly perform segmentation inference on your own data.
+
+We also provide the singularity container for DiffTumor in [HuggingFace 🤗](https://huggingface.co/qicq1c/DiffTumor)
+```bash
+inputs_data=/path/to/your/CT/scan/folders
+outputs_data=/path/to/your/output/folders
+
+wget https://huggingface.co/qicq1c/DiffTumor/resolve/main/difftumor_final.sif
+SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv -B $inputs_data:/workspace/inputs -B $outputs_data:/workspace/outputs difftumor_final.sif
+```
 
 ## Citation
 
