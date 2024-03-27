@@ -341,7 +341,7 @@ def main_worker(gpu, args):
             pretrained_add = 'model_swinvit.pt'
             model.load_from(weights=torch.load(pretrained_add))
             print('Use pretrained ViT weights from: {}'.format(pretrained_add))
-    elif args.model == 'nnunet':
+    elif args.model_name == 'nnunet':
         from monai.networks.nets import DynUNet
         from dynunet_pipeline.create_network import get_kernels_strides
         from dynunet_pipeline.task_params import deep_supr_num
