@@ -226,7 +226,7 @@ def train_epoch(model, loader, optimizer, scaler, epoch, loss_func, args, tumor_
 
         for bs in range(data.shape[0]):
             data_name = data_names[bs]
-            if not ('10_Decathlon' in data_name or '05_KiTS' in data_name):
+            if 'kidney_label' in data_name or 'liver_label' in data_name or 'pancreas_label' in data_name:
                 if random.random() > sample_thresh:
                     healthy_data = data[bs][None,...]
                     healthy_target = target[bs][None,...]

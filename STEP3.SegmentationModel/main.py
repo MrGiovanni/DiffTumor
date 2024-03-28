@@ -139,10 +139,7 @@ class RandCropByPosNegLabeld_select(transforms.RandCropByPosNegLabeld):
         d = dict(data)
         data_name = d['name']
         d.pop('name')
-        if '10_Decathlon' in data_name or '05_KiTS' in data_name:
-            d_crop = super().__call__(d)
-
-        else:
+        if 'kidney_label' in data_name or 'liver_label' in data_name or 'pancreas_label' in data_name:
             flag=0
             while 1:
                 flag+=1
@@ -163,6 +160,8 @@ class RandCropByPosNegLabeld_select(transforms.RandCropByPosNegLabeld):
                     break
                 if flag>30:
                     break
+        else:
+            d_crop = super().__call__(d)
         d_crop[0]['name'] = data_name
 
         return d_crop
@@ -176,10 +175,10 @@ class LoadImage_train(MapTransform):
         d = dict(data)
         data_name = d['name']
 
-        if ('05_KiTS' in data_name) and self.organ_type == 'kidney':
+        if (not 'kidney_label' in data_name) and self.organ_type == 'kidney':
             d = self.reader1.__call__(d)
             d['label'][d['label']==3] = 1
-        elif (not '05_KiTS' in data_name) and self.organ_type == 'kidney':
+        elif ('kidney_label' in data_name) and self.organ_type == 'kidney':
             d = self.reader1.__call__(d)
             d['label'][d['label']>0] = 1
             
@@ -197,8 +196,7 @@ class LoadImage_val(transforms.LoadImaged):
         data_name = d['name']
 
         d = super().__call__(d)
-        if '05_KiTS' in data_name:
-            d['label'][d['label']==3] = 1
+        d['label'][d['label']==3] = 1
 
         return d
     
@@ -289,8 +287,8 @@ def main_worker(gpu, args):
     if args.rank==0:
         print('Batch size is:', args.batch_size, 'epochs', args.max_epochs)
 
-    roi_size = [args.roi_x, args.roi_y, args.roi_x]
-    inf_size = [args.roi_x, args.roi_y, args.roi_x]
+    roi_size = [args.roi_x, args.roi_y, args.roi_z]
+    inf_size = [args.roi_x, args.roi_y, args.roi_z]
     
     data_root = args.data_root
     healthy_data_root = args.healthy_data_root
