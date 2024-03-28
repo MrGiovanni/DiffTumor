@@ -118,7 +118,6 @@ parser.add_argument('--pretrained_dir', default=None, type=str)
 parser.add_argument('--data_root', default=None, type=str)
 parser.add_argument('--healthy_data_root', default=None, type=str)
 parser.add_argument('--datafold_dir', default=None, type=str)
-parser.add_argument('--fold', default=0, type=int)
 parser.add_argument('--cache_num', default=200, type=int)
 
 parser.add_argument('--use_pretrained', action='store_true')
@@ -387,12 +386,12 @@ def main_worker(gpu, args):
         name = line.strip().split()[1].split('.')[0]
 
         if 'kidney_label' in name or 'liver_label' in name or 'pancreas_label' in name:
-            train_img_real.append(data_root + line.strip().split()[0])
-            train_lbl_real.append(data_root + line.strip().split()[1])
+            train_img_real.append(healthy_data_root + line.strip().split()[0])
+            train_lbl_real.append(healthy_data_root + line.strip().split()[1])
             train_name_real.append(name)
         else:
-            train_img_healthy.append(healthy_data_root + line.strip().split()[0])
-            train_lbl_healthy.append(healthy_data_root + line.strip().split()[1])
+            train_img_healthy.append(data_root + line.strip().split()[0])
+            train_lbl_healthy.append(data_root + line.strip().split()[1])
             train_name_healthy.append(name)
     
     train_img = train_img_real + train_img_healthy
