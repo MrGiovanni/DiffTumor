@@ -7,7 +7,7 @@ We have shown that many types of tumors in different abdominal organs look very 
 ## Paper
 
 <b>Towards Generalizable Tumor Synthesis</b> <br/>
-[Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1</sup>, [Xiaoxi Chen](https://www.linkedin.com/in/xiaoxichensjtu/?originalSubdomain=cn)<sup>3</sup>, Haorui Song, [Zhiwei Xiong](http://staff.ustc.edu.cn/~zwxiong/)<sup>1</sup>, [Alan L. Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>2</sup>, [Wei Chen](https://weichen582.github.io/)<sup>2</sup> and [Zongwei Zhou](https://www.zongweiz.com/)<sup>2,*</sup> <br/>
+[Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1</sup>, [Xiaoxi Chen](https://www.linkedin.com/in/xiaoxichensjtu/?originalSubdomain=cn)<sup>3</sup>, [Haorui Song](https://www.linkedin.com/in/haorui-song)<sup>2</sup>, [Zhiwei Xiong](http://staff.ustc.edu.cn/~zwxiong/)<sup>1</sup>, [Alan L. Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>2</sup>, [Wei Chen](https://weichen582.github.io/)<sup>2</sup> and [Zongwei Zhou](https://www.zongweiz.com/)<sup>2,*</sup> <br/>
 <sup>1 </sup>University of Science and Technology of China,  <br/>
 <sup>2 </sup>Johns Hopkins University,  <br/>
 <sup>3 </sup>Shanghai Jiao Tong University  <br/>
