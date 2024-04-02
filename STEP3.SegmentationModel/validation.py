@@ -216,11 +216,11 @@ def main():
     ## NETWORK
     model, model_inferer = _get_model(args)
 
-    liver_dice = []
-    liver_nsd  = []
+    organ_dice = []
+    organ_nsd  = []
     tumor_dice = []
     tumor_nsd  = []
-    header = ['name', 'liver_dice', 'liver_nsd', 'tumor_dice', 'tumor_nsd']
+    header = ['name', 'organ_dice', 'organ_nsd', 'tumor_dice', 'tumor_nsd']
     rows = []
 
     model.eval()
@@ -248,8 +248,8 @@ def main():
             current_liver_dice, current_liver_nsd = cal_dice_nsd(val_outputs[1,...], val_labels[1,...], spacing_mm=spacing_mm)
             current_tumor_dice, current_tumor_nsd = cal_dice_nsd(val_outputs[2,...], val_labels[2,...], spacing_mm=spacing_mm)
 
-            liver_dice.append(current_liver_dice)
-            liver_nsd.append(current_liver_nsd)
+            organ_dice.append(current_liver_dice)
+            organ_nsd.append(current_liver_nsd)
             tumor_dice.append(current_tumor_dice)
             tumor_nsd.append(current_tumor_nsd)
 
@@ -258,7 +258,7 @@ def main():
             rows.append(row)
 
             print(name, val_outputs[0].shape, \
-                'dice: [{:.3f}  {:.3f}]; nsd: [{:.3f}  {:.3f}]; sen:{:.3f}; spe: {:.3f}'.format(current_liver_dice, current_tumor_dice, current_liver_nsd, current_tumor_nsd), \
+                'dice: [{:.3f}  {:.3f}]; nsd: [{:.3f}  {:.3f}]'.format(current_liver_dice, current_tumor_dice, current_liver_nsd, current_tumor_nsd), \
                 'time {:.2f}s'.format(time.time() - start_time))
 
             # save the prediction
@@ -275,11 +275,11 @@ def main():
             )
 
 
-        print("organ dice:", np.mean(liver_dice))
-        print("organ nsd:", np.mean(liver_nsd))
+        print("organ dice:", np.mean(organ_dice))
+        print("organ nsd:", np.mean(organ_nsd))
         print("tumor dice:", np.mean(tumor_dice))
         print("tumor nsd",np.mean(tumor_nsd))
-        rows.append(['average', liver_dice, liver_nsd, tumor_dice, tumor_nsd])
+        rows.append(['average', organ_dice, organ_nsd, tumor_dice, tumor_nsd])
 
         # save metrics to cvs file
         csv_save = os.path.join(args.save_dir, args.model_name, str(args.val_overlap))
