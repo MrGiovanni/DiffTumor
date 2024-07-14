@@ -111,7 +111,7 @@ def _get_model(args):
         from monai.networks.nets import DynUNet
         from dynunet_pipeline.create_network import get_kernels_strides
         from dynunet_pipeline.task_params import deep_supr_num
-        task_id = '03'
+        task_id = 'custom'
         kernels, strides = get_kernels_strides(task_id)
         model = DynUNet(
             spatial_dims=3,
