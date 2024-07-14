@@ -7,10 +7,10 @@ We have shown that many types of tumors in different abdominal organs look very 
 ## Paper
 
 <b>Towards Generalizable Tumor Synthesis</b> <br/>
-[Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1</sup>, [Xiaoxi Chen](https://www.linkedin.com/in/xiaoxichensjtu/?originalSubdomain=cn)<sup>3</sup>, [Haorui Song](https://www.linkedin.com/in/haorui-song)<sup>2</sup>, [Zhiwei Xiong](http://staff.ustc.edu.cn/~zwxiong/)<sup>1</sup>, [Alan L. Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>2</sup>, [Wei Chen](https://weichen582.github.io/)<sup>2</sup> and [Zongwei Zhou](https://www.zongweiz.com/)<sup>2,*</sup> <br/>
+[Qi Chen](https://scholar.google.com/citations?user=4Q5gs2MAAAAJ&hl=en)<sup>1</sup>, [Xiaoxi Chen](https://www.linkedin.com/in/xiaoxichensjtu/?originalSubdomain=cn)<sup>2</sup>, [Haorui Song](https://www.linkedin.com/in/haorui-song)<sup>3</sup>, [Zhiwei Xiong](http://staff.ustc.edu.cn/~zwxiong/)<sup>1</sup>, [Alan L. Yuille](https://www.cs.jhu.edu/~ayuille/)<sup>3</sup>, [Wei Chen](https://weichen582.github.io/)<sup>3</sup> and [Zongwei Zhou](https://www.zongweiz.com/)<sup>3,*</sup> <br/>
 <sup>1 </sup>University of Science and Technology of China,  <br/>
-<sup>2 </sup>Johns Hopkins University,  <br/>
-<sup>3 </sup>Shanghai Jiao Tong University  <br/>
+<sup>2 </sup>Shanghai Jiao Tong University,  <br/>
+<sup>3 </sup>Johns Hopkins University  <br/>
 CVPR, 2024 <br/>
 [paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf) | [code](https://github.com/MrGiovanni/DiffTumor) | [huggingface](https://huggingface.co/MrGiovanni/DiffTumor)
 
@@ -225,7 +225,7 @@ cd SegmentationModel
 datapath=/mnt/ccvl15/zzhou82/PublicAbdominalData/
 organ=liver
 fold=0
-datafold_dir="cross_eval/'$organ'_aug_data_fold/"
+datafold_dir=cross_eval/"$organ"_aug_data_fold/
 
 # U-Net
 python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
@@ -234,7 +234,7 @@ python -W ignore validation.py --model=unet --data_root $datapath --datafold_dir
 python -W ignore validation.py --model=nnunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 # Swin-UNETR
-python -W ignore validation.py --model=swinunet --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
+python -W ignore validation.py --model=swinunetr --data_root $datapath --datafold_dir $datafold_dir --tumor_type tumor --organ_type $organ --fold $fold --log_dir $organ/$organ.fold$fold.unet --save_dir out/$organ/$organ.fold$fold.unet
 
 ```
 
@@ -250,13 +250,12 @@ SINGULARITYENV_CUDA_VISIBLE_DEVICES=0 singularity run --nv -B $inputs_data:/work
 ## Citation
 
 ```
-@misc{chen2024generalizable,
-      title={Towards Generalizable Tumor Synthesis}, 
-      author={Qi Chen and Xiaoxi Chen and Haorui Song and Zhiwei Xiong and Alan Yuille and Chen Wei and Zongwei Zhou},
-      year={2024},
-      eprint={2402.19470},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
+@inproceedings{chen2024towards,
+  title={Towards generalizable tumor synthesis},
+  author={Chen, Qi and Chen, Xiaoxi and Song, Haorui and Xiong, Zhiwei and Yuille, Alan and Wei, Chen and Zhou, Zongwei},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={11147--11158},
+  year={2024}
 }
 ```
 
