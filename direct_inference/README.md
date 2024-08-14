@@ -2,6 +2,7 @@
 <h3 align="center" style="font-size: 20px; margin-bottom: 4px">Apply to New CT Scans</h3>
 <p align="center">
     <a href='https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf'><img src='https://img.shields.io/badge/Paper-PDF-purple'></a> 
+    <a href='https://github.com/MrGiovanni/DiffTumor/document/cvpr_slides.pdf'><img src='https://img.shields.io/badge/Slides-PDF-orange'></a> 
     <a href='https://hub.jhu.edu/2024/05/30/researchers-create-artificial-tumors-for-cancer-research/'><img src='https://img.shields.io/badge/JHU-News-yellow'></a>
     <br/>
     <a href="https://github.com/MrGiovanni/DiffTumor"><img src="https://img.shields.io/github/stars/MrGiovanni/DiffTumor?style=social" /></a>

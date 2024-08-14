@@ -12,7 +12,7 @@ We have shown that many types of tumors in different abdominal organs look very 
 <sup>2 </sup>Shanghai Jiao Tong University,  <br/>
 <sup>3 </sup>Johns Hopkins University  <br/>
 CVPR, 2024 <br/>
-[paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf) | [code](https://github.com/MrGiovanni/DiffTumor) | [huggingface](https://huggingface.co/MrGiovanni/DiffTumor)
+[paper](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf) | [code](https://github.com/MrGiovanni/DiffTumor) | [slides](https://github.com/MrGiovanni/DiffTumor/document/cvpr_slides.pdf) [huggingface](https://huggingface.co/MrGiovanni/DiffTumor)
 
 **We have documented common questions for the paper in [Frequently Asked Questions (FAQ)](documents/FAQ.md).**
 
