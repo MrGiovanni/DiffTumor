@@ -6,7 +6,8 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/MrGiovanni/DiffTumor?style=social)](https://github.com/MrGiovanni/DiffTumor/stargazers)
 <a href="https://twitter.com/bodymaps317">
         <img src="https://img.shields.io/twitter/follow/BodyMaps?style=social" alt="Follow on Twitter" />
-</a>
+</a><br/>
+**Subscribe us: https://groups.google.com/u/2/g/bodymaps**  
 
 </div>
 
