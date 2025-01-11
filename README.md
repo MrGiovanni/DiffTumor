@@ -1,4 +1,14 @@
-# Generalizable Tumor Synthesis
+<h1 align="center">DiffTumor</h1>
+
+<div align="center">
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=MrGiovanni/DiffTumor)
+[![GitHub Repo stars](https://img.shields.io/github/stars/MrGiovanni/DiffTumor?style=social)](https://github.com/MrGiovanni/DiffTumor/stargazers)
+<a href="https://twitter.com/bodymaps317">
+        <img src="https://img.shields.io/twitter/follow/BodyMaps?style=social" alt="Follow on Twitter" />
+</a>
+
+</div>
 
 We have shown that many types of tumors in different abdominal organs look very similar if they are small (less than 2cm) which implies that we can train the AI to detect tumors in the liver or kidney but only training the diffusion model on tumors in the pancreas ([Q. Chen et al. CVPR 2024](https://www.cs.jhu.edu/~alanlab/Pubs24/chen2024towards.pdf)). These studies have been validated both by studies of radiologists (by challenging them to distinguish between a synthetic tumor and a real tumor) and by comprehensive tests of the AI algorithms trained using stimulated data.
 
