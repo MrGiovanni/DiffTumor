@@ -89,7 +89,7 @@ vqgan_ckpt=<pretrained-AutoencoderModel> (e.g., /pretrained_models/AutoencoderMo
 fold=0
 datapath=<your-datapath> (e.g., /data/10_Decathlon/Task03_Liver/)
 tumorlabel=<your-labelpath> (e.g., /data/preprocessed_labels/)
-python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="liver_early_tumor_fold'$fold'"  model.vqgan_ckpt=$vqgan_ckpt
+python train.py dataset.name=liver_tumor_train dataset.fold=$fold dataset.data_root_path=$datapath dataset.label_root_path=$tumorlabel dataset.dataset_list=['liver_tumor_data_early_fold'] dataset.uniform_sample=False model.results_folder_postfix="liver_early_tumor_fold"$fold""  model.vqgan_ckpt=$vqgan_ckpt
 ```
 
 We offer the pre-trained checkpoints of Diffusion Model, which were trained for early-stage and mid-/late- stage tumors for liver, pancreas and kidney, respectively. This checkpoint can be directly used for STEP3 if you do not want to re-train the Diffusion Model. Simply download it to `STEP3.SegmentationModel/TumorGeneration/model_weight`
