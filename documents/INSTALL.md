@@ -41,5 +41,6 @@ mamba create -n difftumor python=3.8
 conda create -n difftumor python=3.8
 source activate difftumor # or conda activate difftumor
 pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install pip==24.0
 pip install -r requirements.txt
 ```
