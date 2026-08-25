@@ -1,5 +1,40 @@
+<<<<<<< HEAD
 # macOS
 .DS_Store
 ._*
 .Spotlight-V100
 .Trashes
+=======
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+>>>>>>> a4ea7be7f302817a8232955f1d8c2448c41a5279
