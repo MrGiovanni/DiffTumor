@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+message: "If you use DiffTumor, please cite the CVPR 2024 paper below."
+title: "DiffTumor: generalizable diffusion-based tumor synthesis for CT"
+abstract: "Official implementation of DiffTumor, a diffusion-based tumor synthesis framework that generates generalizable synthetic tumors across organs to train CT tumor segmentation models."
+type: software
+repository-code: "https://github.com/MrGiovanni/DiffTumor"
+url: "https://github.com/MrGiovanni/DiffTumor"
+license: CC-BY-NC-ND-4.0
+keywords:
+  - "tumor-synthesis"
+  - "diffusion-model"
+  - "generative-model"
+  - "ct"
+  - "medical-imaging"
+  - "segmentation"
+authors:
+  - family-names: "Chen"
+    given-names: "Qi"
+  - family-names: "Chen"
+    given-names: "Xiaoxi"
+  - family-names: "Song"
+    given-names: "Haorui"
+  - family-names: "Xiong"
+    given-names: "Zhiwei"
+  - family-names: "Yuille"
+    given-names: "Alan"
+  - family-names: "Wei"
+    given-names: "Chen"
+  - family-names: "Zhou"
+    given-names: "Zongwei"
+    orcid: "https://orcid.org/0000-0002-3154-9851"
+preferred-citation:
+  type: conference-paper
+  title: "Towards Generalizable Tumor Synthesis"
+  authors:
+    - family-names: "Chen"
+      given-names: "Qi"
+    - family-names: "Chen"
+      given-names: "Xiaoxi"
+    - family-names: "Song"
+      given-names: "Haorui"
+    - family-names: "Xiong"
+      given-names: "Zhiwei"
+    - family-names: "Yuille"
+      given-names: "Alan"
+    - family-names: "Wei"
+      given-names: "Chen"
+    - family-names: "Zhou"
+      given-names: "Zongwei"
+      orcid: "https://orcid.org/0000-0002-3154-9851"
+  collection-title: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)"
+  start: 11147
+  end: 11158
+  year: 2024
+  doi: "10.1109/CVPR52733.2024.01060"
