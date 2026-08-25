@@ -45,7 +45,7 @@ See [installation instructions](documents/INSTALL.md) to create an environment a
 You can train Autoencoder Model on AbdomenAtlas 1.0 dataset by your own. The release of AbdomenAtlas 1.0 can be found at [https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini](https://huggingface.co/datasets/AbdomenAtlas/AbdomenAtlas_1.0_Mini).
 ```bash
 cd STEP1.AutoencoderModel
-datapath=<your-datapath> (e.g., /data/bdomenAtlasMini1.0/)
+datapath=<your-datapath> (e.g., /data/AbdomenAtlasMini1.0/)
 gpu_num=1
 cache_rate=0.05
 batch_size=4
@@ -232,7 +232,7 @@ We offer the pre-trained checkpoints of Segmentation Model (U-Net, nnU-Net and S
 ## 4. Evaluation
 
 ```bash
-cd SegmentationModel
+cd STEP3.SegmentationModel
 datapath=/mnt/ccvl15/zzhou82/PublicAbdominalData/
 organ=liver
 fold=0

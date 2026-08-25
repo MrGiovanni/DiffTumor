@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 # macOS
 .DS_Store
 ._*
 .Spotlight-V100
 .Trashes
-=======
 # Python
 __pycache__/
 *.py[cod]
@@ -37,4 +35,3 @@ logs/
 env/
 venv/
 ENV/
->>>>>>> a4ea7be7f302817a8232955f1d8c2448c41a5279
